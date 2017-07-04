@@ -17,15 +17,30 @@
 	    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css" rel="stylesheet" />
 	    <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 	    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.15/css/dataTables.bootstrap.min.css">
+	    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css" rel="stylesheet" />
 
 	  	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+	  	<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
 
-	    <!-- <script type="text/javascript">
-  			$('select').select2();
-		</script> -->
+	    <script type="text/javascript">
+			$(document).ready(function() {
+  				$(".classes").select2();
+			});
+		</script>
+		
 		<script type="text/javascript">
             $(document).ready(function(){
               $('#classe_datatable').DataTable({
+                "order": [[0, "desc"]],
+                "language": {
+		            "url": "////cdn.datatables.net/plug-ins/1.10.15/i18n/Portuguese-Brasil.json"
+		        }
+              });
+            });
+        </script>
+        <script>
+        	$(document).ready(function(){
+              $('#subclasse_datatable').DataTable({
                 "order": [[0, "desc"]],
                 "language": {
 		            "url": "////cdn.datatables.net/plug-ins/1.10.15/i18n/Portuguese-Brasil.json"

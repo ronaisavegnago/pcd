@@ -18,7 +18,7 @@ class Classe_m extends CI_Model{
 		return $this->db->query("
 			select * from classe c
 			inner join abertura_classe ac on ac.classe_classe_codigo = c.classe_codigo
-			order by c.classe_codigo asc
+			order by c.classe_nome asc
 		")->result();
 	}
 
