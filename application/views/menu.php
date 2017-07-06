@@ -19,15 +19,15 @@
 				<li>
 					<a href="#" class="ls-ico-arrow-down" title="Grupo">Grupo</a>
 					<ul>
-						<li><a href="">Adicionar</a></li>
-						<li><a href="">Listar</a></li>
+						<li><a href="<?php echo base_url('grupo_c/novo')?>">Adicionar</a></li>
+						<li><a href="<?php echo base_url('grupo_c/index')?>">Listar</a></li>
 					</ul>
 				</li>
 				<li>
 					<a href="#" class="ls-ico-arrow-down" title="Subgrupo">Subgrupo</a>
 					<ul>
-						<li><a href="">Adicionar</a></li>
-						<li><a href="">Listar</a></li>
+						<li><a href="<?php echo base_url('subgrupo/index')?>">Adicionar</a></li>
+						<li><a href="<?php echo base_url('subgrupo/index')?>">Listar</a></li>
 					</ul>
 				</li>
 			</ul>

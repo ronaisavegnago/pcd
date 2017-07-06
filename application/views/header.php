@@ -48,6 +48,16 @@
               });
             });
         </script>
+        <script>
+        	$(document).ready(function(){
+              $('#grupo_datatable').DataTable({
+                "order": [[0, "desc"]],
+                "language": {
+		            "url": "////cdn.datatables.net/plug-ins/1.10.15/i18n/Portuguese-Brasil.json"
+		        }
+              });
+            });
+        </script>
 
 	</head>
 	<body>
