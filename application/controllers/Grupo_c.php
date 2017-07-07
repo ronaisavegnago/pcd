@@ -35,7 +35,7 @@ class Grupo_c extends CI_Controller {
 
 	public function edita($grupocodigo){
 		$data['grupo'] = $this->grupo->get_grupo_codigo($grupocodigo);
-		$data['classes'] = $this->subclasse_select($this->subclasse->get_subclasses());
+		$data['subclasses'] = $this->subclasse_select($this->subclasse->get_subclasses());
 		$this->load->view('grupo/edita_grupo',$data);
 	}
 
@@ -107,9 +107,9 @@ class Grupo_c extends CI_Controller {
 		foreach($grupos as $g){
 			$ext = $this->grupo->get_grupo_extinto($g->grupo_codigo);
 			if(count($ext) == 0 ){
-				$ativa = ($g->grupo_ativo == 1) ? '<span class="ls-tag-primary">Ativa</span>' : '<span class="ls-tag-primary">Inativa</span>';
+				$ativa = ($g->grupo_ativo == 1) ? '<span class="ls-tag-primary">Ativo</span>' : '<span class="ls-tag-primary">Inativo</span>';
 			}else{
-				$ativa = '<span class="ls-tag-danger">Extinta</span>';
+				$ativa = '<span class="ls-tag-danger">Extinto</span>';
 			}
 			$td .= '<tr>'.
 					'<td>'.'<a href="'.base_url('grupo_c/ver/'.$g->grupo_codigo).'">'.$g->grupo_codigo.'</a>'.'</td>'.

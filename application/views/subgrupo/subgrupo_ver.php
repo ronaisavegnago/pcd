@@ -6,21 +6,21 @@ $this->load->view('menu');
 
 <main class="ls-main">
 	<div class="container-fluid">
-    	<h1 class="ls-title-intro ls-ico-accessibility">Subclasse <?php echo $subclasse[0]->subclasse_codigo.'/'.$subclasse[0]->subclasse_nome?></h1>
+    	<h1 class="ls-title-intro ls-ico-accessibility">Subgrupo <?php echo $subgrupo[0]->subgrupo_codigo.'/'.$subgrupo[0]->subgrupo_nome?></h1>
     	<?php
-    		if($subclasse[0]->subclasse_ativa == 1){
-    			echo '<div class="ls-alert-info">Subclasse Ativa</div>';
+    		if($subgrupo[0]->subgrupo_ativo == 1){
+    			echo '<div class="ls-alert-info">Grupo Ativo</div>';
     		}else{
-    			echo '<div class="ls-alert-warning">Subclasse Inativa</div>';
+    			echo '<div class="ls-alert-warning">Grupo Inativo</div>';
     		}
     		if(count($extincao) == 1){
-    			echo '<div class="ls-alert-danger">Subclasse Extinta</div>';
+    			echo '<div class="ls-alert-danger">Grupo Extinto</div>';
     		}
     	?>
     	<div class="row">
     		<div class="col-md-3">
     			<div class="ls-box-filter">
-    				<legend>Abertura da subclasse</legend>
+    				<legend>Abertura do subgrupo</legend>
     				<br>
     				<p><strong>Data: </strong><?php echo $abertura[0]->data?></p>
     				<p><strong>Hora: </strong><?php echo $abertura[0]->hora?></p>
@@ -29,7 +29,7 @@ $this->load->view('menu');
     		<?php if(count($extincao) != 0){?>
     		<div class="col-md-6">
     			<div class="ls-box-filter">
-    				<legend>Extinção da subclasse</legend>
+    				<legend>Extinção do subgrupo</legend>
     				<br>
     				<p><strong>Data: </strong><?php echo $extincao[0]->data?></p>
     				<p><strong>Hora: </strong><?php echo $extincao[0]->hora?></p>
@@ -40,7 +40,7 @@ $this->load->view('menu');
     		<?php if(count($mudanca_nome) != 0){?>
     		<div class="col-md-12">
     			<div class="ls-box-filter">
-    				<legend>Mudança de nome da subclasse</legend>
+    				<legend>Mudança de nome do subgrupo</legend>
     				<table class="ls-table">
 						<thead>
 							<tr>
@@ -71,7 +71,7 @@ $this->load->view('menu');
     		<?php if(count($desativacao) != 0){?>
     		<div class="col-md-6">
     			<div class="ls-box-filter">
-    				<legend>Desativação da subclasse</legend>
+    				<legend>Desativação do subgrupo</legend>
     				<table class="ls-table">
 						<thead>
 							<tr>
@@ -100,7 +100,7 @@ $this->load->view('menu');
     		<?php if(count($reativacao) != 0){?>
     		<div class="col-md-6">
     			<div class="ls-box-filter">
-    				<legend>Reativação da subclasse</legend>
+    				<legend>Reativação do subgrupo</legend>
     				<table class="ls-table">
 						<thead>
 							<tr>

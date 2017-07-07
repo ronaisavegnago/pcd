@@ -1,6 +1,6 @@
 <div class="ls-topbar">
 	<div class="ls-notification-topbar">
-		<div data-ls-module="dropdown" class="ls-dropdown ls-user-account">
+		<!-- <div data-ls-module="dropdown" class="ls-dropdown ls-user-account">
 			<a href="#" class="ls-ico-user">
 				<span class="ls-name">User</span>
 			</a>
@@ -11,7 +11,7 @@
 					<li><a href="">Sair</a></li>
 				</ul>
 			</nav>
-		</div>
+		</div> -->
 	</div>
 
 	<span class="ls-show-sidebar ls-ico-menu"></span>
@@ -25,7 +25,7 @@
 
 
 
-<aside class="ls-sidebar">
+<!-- <aside class="ls-sidebar">
 	<div data-ls-module="dropdown" class="ls-dropdown ls-user-account ls-active">
 		<a href="#" class="ls-ico-user">
 			<span class="ls-name">User</span>
@@ -39,4 +39,4 @@
 		</nav>
 	</div>
 	<h1 class="ls-brand-name ls-ico-docs"><a href="<?php echo base_url()?>">PCD Creator</a></h1>
-</aside>
+</aside> -->

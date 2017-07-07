@@ -26,8 +26,8 @@
 				<li>
 					<a href="#" class="ls-ico-arrow-down" title="Subgrupo">Subgrupo</a>
 					<ul>
-						<li><a href="<?php echo base_url('subgrupo/index')?>">Adicionar</a></li>
-						<li><a href="<?php echo base_url('subgrupo/index')?>">Listar</a></li>
+						<li><a href="<?php echo base_url('subgrupo_c/novo')?>">Adicionar</a></li>
+						<li><a href="<?php echo base_url('subgrupo_c/index')?>">Listar</a></li>
 					</ul>
 				</li>
 			</ul>

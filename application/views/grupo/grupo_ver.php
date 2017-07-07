@@ -6,7 +6,7 @@ $this->load->view('menu');
 
 <main class="ls-main">
 	<div class="container-fluid">
-    	<h1 class="ls-title-intro ls-ico-accessibility">Classe <?php echo $grupo[0]->grupo_codigo.'/'.$grupo[0]->grupo_nome?></h1>
+    	<h1 class="ls-title-intro ls-ico-accessibility">Grupo <?php echo $grupo[0]->grupo_codigo.'/'.$grupo[0]->grupo_nome?></h1>
     	<?php
     		if($grupo[0]->grupo_ativo == 1){
     			echo '<div class="ls-alert-info">Grupo Ativo</div>';
