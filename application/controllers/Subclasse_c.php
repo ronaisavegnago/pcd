@@ -15,7 +15,7 @@ class Subclasse_c extends CI_Controller {
 	}
 
 	public function novo(){
-		$data['classes'] = $this->classe_select($this->classe->get_classes());
+		$data['classes'] = $this->classe_select($this->classe->get_classes_ativas());
 		$this->load->view('subclasse/nova_subclasse',$data);
 	}
 

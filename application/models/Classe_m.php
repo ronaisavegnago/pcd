@@ -22,6 +22,15 @@ class Classe_m extends CI_Model{
 		")->result();
 	}
 
+	public function get_classes_ativas(){
+		return $this->db->query("
+			select * from classe c
+			inner join abertura_classe ac on ac.classe_classe_codigo = c.classe_codigo
+			where c.classe_ativa = 1
+			order by c.classe_nome asc
+		")->result();
+	}
+
 	public function desativa($classecodigo){
 		$data2['data'] = date("y-m-d");
 		$data2['hora'] = date("h:m:s");

@@ -15,7 +15,7 @@ class Grupo_c extends CI_Controller {
 	}
 
 	public function novo(){
-		$data['subclasses'] = $this->subclasse_select($this->subclasse->get_subclasses());
+		$data['subclasses'] = $this->subclasse_select($this->subclasse->get_subclasses_ativas());
 		$this->load->view('grupo/novo_grupo',$data);
 	}
 

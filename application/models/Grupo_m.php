@@ -23,6 +23,16 @@ class Grupo_m extends CI_Model{
 			")->result();
 	}
 
+	public function get_grupos_ativos(){
+		return $this->db->query("
+			select g.*,`ag`.*,s.subclasse_nome,s.subclasse_codigo from grupo g
+			inner join abertura_grupo `ag` on ag.grupo_grupo_codigo = g.grupo_codigo
+			inner join subclasse s on g.subclasse_subclasse_codigo = s.subclasse_codigo
+			where g.grupo_ativo = 1
+			order by g.grupo_nome asc
+			")->result();
+	}
+
 	public function get_grupo_extinto($grupocodigo){
 		$this->db->where('grupo_grupo_codigo',$grupocodigo);
 		$this->db->order_by('data');
