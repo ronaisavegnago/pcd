@@ -113,4 +113,9 @@ class Grupo_m extends CI_Model{
 		return $this->db->get('reativacao_grupo')->result();
 	}
 
+	public function get_grupo_codigo_subclasse($subclassecodigo){
+		$this->db->where('subclasse_subclasse_codigo',$subclassecodigo);
+		return $this->db->get('grupo')->result();
+	}
+
 }

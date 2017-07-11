@@ -5,8 +5,10 @@ class Grupo_c extends CI_Controller {
 
 	public function __construct(){
 		parent::__construct();
+		$this->load->model('Classe_m','classe');
 		$this->load->model('Subclasse_m','subclasse');
 		$this->load->model('Grupo_m','grupo');
+		$this->load->model('Subgrupo_m','subgrupo');
 	}
 
 	public function index(){
@@ -79,8 +81,21 @@ class Grupo_c extends CI_Controller {
 		$data['responsavel'] = 'user';
 		$data['grupo_grupo_codigo'] = $grupocodigo;
 		$this->grupo->extinguir_grupo($data);
-		// $this->extincao_derivados(); //extingui subgrupos vinculados
+		unset($data);
+		$this->extincao_derivados($grupocodigo); //extingui subgrupos vinculados
 		redirect(base_url('grupo_c/index'));
+	}
+
+	public function extincao_derivados($grupocodigo){
+		$subgrupos = $this->subgrupo->get_subgrupo_codigo_grupo($grupocodigo);
+		foreach($subgrupos as $sg){
+			$this->subgrupo->desativa($sg->subgrupo_codigo);
+			$data['data'] = date("y-m-d");
+			$data['hora'] = date("h:m:s");
+			$data['responsavel'] = 'user';
+			$data['subgrupo_subgrupo_codigo'] = $sg->subclasse_codigo;
+			$this->subgrupo->extinguir_subgrupo($data);
+		}
 	}
 
 	public function ver($grupocodigo){

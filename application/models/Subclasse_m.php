@@ -113,4 +113,8 @@ class Subclasse_m extends CI_Model{
 		return $this->db->get('reativacao_subclasse')->result();
 	}
 
+	public function get_subclasse_codigo_classe($classecodigo){
+		$this->db->where('classe_classe_codigo',$classecodigo);
+		return $this->db->get('subclasse')->result();
+	}
 }

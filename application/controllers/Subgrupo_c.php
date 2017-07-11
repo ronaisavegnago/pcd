@@ -5,8 +5,10 @@ class Subgrupo_c extends CI_Controller {
 
 	public function __construct(){
 		parent::__construct();
-		$this->load->model('Subgrupo_m','subgrupo');
+		$this->load->model('Classe_m','classe');
+		$this->load->model('Subclasse_m','subclasse');
 		$this->load->model('Grupo_m','grupo');
+		$this->load->model('Subgrupo_m','subgrupo');
 	}
 
 	public function index(){

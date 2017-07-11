@@ -6,6 +6,9 @@ class Classe_c extends CI_Controller {
 	public function __construct(){
 		parent::__construct();
 		$this->load->model('Classe_m','classe');
+		$this->load->model('Subclasse_m','subclasse');
+		$this->load->model('Grupo_m','grupo');
+		$this->load->model('Subgrupo_m','subgrupo');
 	}
 
 	public function index(){
@@ -83,8 +86,41 @@ class Classe_c extends CI_Controller {
 		$data['responsavel'] = 'user';
 		$data['classe_classe_codigo'] = $classe_codigo;
 		$this->classe->extinguir_classe($data);
-		// $this->extincao_derivados(); //extingui subclasses,grupos e subgrupos vinculados
+		unset($data);
+		$this->extincao_derivados($classe_codigo); //extingui subclasses,grupos e subgrupos vinculados
 		redirect(base_url('classe_c/index'));
+	}
+
+	public function extincao_derivados($classe_codigo){
+		$subclasses = $this->subclasse->get_subclasse_codigo_classe($classe_codigo);
+		foreach($subclasses as $s){
+			$grupos = $this->grupo->get_grupo_codigo_subclasse($s->subclasse_codigo);
+			foreach($grupos as $g){
+				$subgrupos = $this->subgrupo->get_subgrupo_codigo_grupo($g->grupo_codigo);
+				foreach($subgrupos as $sg){
+					$this->subgrupo->desativa($sg->subgrupo_codigo);
+					$data['data'] = date("y-m-d");
+					$data['hora'] = date("h:m:s");
+					$data['responsavel'] = 'user';
+					$data['subgrupo_subgrupo_codigo'] = $sg->subgrupo_codigo;
+					$this->subgrupo->extinguir_subgrupo($data);
+				}
+				unset($data);
+				$this->grupo->desativa($g->grupo_codigo);
+				$data['data'] = date("y-m-d");
+				$data['hora'] = date("h:m:s");
+				$data['responsavel'] = 'user';
+				$data['grupo_grupo_codigo'] = $g->grupo_codigo;
+				$this->grupo->extinguir_grupo($data);
+			}
+			unset($data);
+			$this->subclasse->desativa($s->subclasse_codigo);
+			$data['data'] = date("y-m-d");
+			$data['hora'] = date("h:m:s");
+			$data['responsavel'] = 'user';
+			$data['subclasse_subclasse_codigo'] = $s->subclasse_codigo;
+			$this->subclasse->extinguir_subclasse($data);
+		}
 	}
 
 	public function get_table_classes($classes){

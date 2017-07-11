@@ -5,8 +5,10 @@ class Subclasse_c extends CI_Controller {
 
 	public function __construct(){
 		parent::__construct();
-		$this->load->model('Subclasse_m','subclasse');
 		$this->load->model('Classe_m','classe');
+		$this->load->model('Subclasse_m','subclasse');
+		$this->load->model('Grupo_m','grupo');
+		$this->load->model('Subgrupo_m','subgrupo');
 	}
 
 	public function index(){
@@ -79,8 +81,31 @@ class Subclasse_c extends CI_Controller {
 		$data['responsavel'] = 'user';
 		$data['subclasse_subclasse_codigo'] = $subclassecodigo;
 		$this->subclasse->extinguir_subclasse($data);
-		// $this->extincao_derivados(); //extingui grupos e subgrupos vinculados
+		unset($data);
+		$this->extincao_derivados($subclasse_codigo); //extingui grupos e subgrupos vinculados
 		redirect(base_url('subclasse_c/index'));
+	}
+
+	public function extincao_derivados($subclasse_codigo){
+		$grupos = $this->grupo->get_grupo_codigo_subclasse($subclasse_codigo);
+		foreach($grupos as $g){
+			$subgrupos = $this->subgrupo->get_subgrupo_codigo_grupo($g->grupo_codigo);
+			foreach($subgrupos as $sg){
+				$this->subgrupo->desativa($s->subclasse_codigo);
+				$data['data'] = date("y-m-d");
+				$data['hora'] = date("h:m:s");
+				$data['responsavel'] = 'user';
+				$data['subgrupo_subgrupo_codigo'] = $s->subclasse_codigo;
+				$this->subgrupo->extinguir_subgrupo($data);
+			}
+			unset($data);
+			$this->grupo->desativa($g->grupo_codigo);
+			$data['data'] = date("y-m-d");
+			$data['hora'] = date("h:m:s");
+			$data['responsavel'] = 'user';
+			$data['grupo_grupo_codigo'] = $g->grupo_codigo;
+			$this->grupo->extinguir_grupo($data);
+		}
 	}
 
 	public function ver($subclassecodigo){
