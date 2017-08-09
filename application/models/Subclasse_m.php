@@ -117,4 +117,8 @@ class Subclasse_m extends CI_Model{
 		$this->db->where('classe_classe_codigo',$classecodigo);
 		return $this->db->get('subclasse')->result();
 	}
+
+	public function count(){
+		return $this->db->count_all_results('subclasse');
+	}
 }

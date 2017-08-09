@@ -81,7 +81,6 @@ class Classe_m extends CI_Model{
 
 	public function get_classe_extinta($classecodigo){
 		$this->db->where('classe_classe_codigo',$classecodigo);
-		$this->db->order_by('data');
 		return $this->db->get('extincao_classe')->result();
 	}
 
@@ -106,5 +105,9 @@ class Classe_m extends CI_Model{
 		$this->db->where('classe_classe_codigo',$classecodigo);
 		$this->db->order_by('data');
 		return $this->db->get('reativacao_classe')->result();
+	}
+
+	public function count(){
+		return $this->db->count_all_results('classe');
 	}
 }

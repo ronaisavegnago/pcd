@@ -109,4 +109,8 @@ class Subgrupo_m extends CI_Model{
 		return $this->db->get('subgrupo')->result();
 	}
 
+	public function count(){
+		return $this->db->count_all_results('subgrupo');
+	}
+
 }

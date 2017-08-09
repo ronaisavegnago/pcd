@@ -18,7 +18,7 @@
 
 	<h1 class="ls-brand-name">
 		<a href="<?php echo base_url();?>" class="ls-ico-docs">
-			PCD Creator
+			Elaborador de PCD
 		</a>
 	</h1>
 </div>

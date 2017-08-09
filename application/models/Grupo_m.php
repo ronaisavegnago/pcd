@@ -118,4 +118,8 @@ class Grupo_m extends CI_Model{
 		return $this->db->get('grupo')->result();
 	}
 
+	public function count(){
+		return $this->db->count_all_results('grupo');
+	}
+
 }
