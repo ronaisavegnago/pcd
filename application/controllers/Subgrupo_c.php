@@ -91,7 +91,7 @@ class Subgrupo_c extends CI_Controller {
 		$data['extincao'] = $this->subgrupo->get_subgrupo_extinto($subgrupocodigo);
 		$data['desativacao'] = $this->subgrupo->get_subgrupo_desativacao($subgrupocodigo);
 		$data['reativacao'] = $this->subgrupo->get_subgrupo_reativacao($subgrupocodigo);
-		$data['mudanca_nome'] = $this->subgrupo->get_subgrupo_mudancao_nome($subgrupocodigo);
+		$data['mudanca_nome'] = $this->subgrupo->get_subgrupo_mudanca_nome($subgrupocodigo);
 		$this->load->view('subgrupo/subgrupo_ver',$data);
 	}
 

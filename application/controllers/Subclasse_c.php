@@ -114,7 +114,7 @@ class Subclasse_c extends CI_Controller {
 		$data['extincao'] = $this->subclasse->get_subclasse_extinta($subclassecodigo);
 		$data['desativacao'] = $this->subclasse->get_subclasse_desativacao($subclassecodigo);
 		$data['reativacao'] = $this->subclasse->get_subclasse_reativacao($subclassecodigo);
-		$data['mudanca_nome'] = $this->subclasse->get_subclasse_mudancao_nome($subclassecodigo);
+		$data['mudanca_nome'] = $this->subclasse->get_subclasse_mudanca_nome($subclassecodigo);
 		$this->load->view('subclasse/subclasse_ver',$data);
 	}
 

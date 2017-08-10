@@ -101,7 +101,7 @@ class Subclasse_m extends CI_Model{
 		return $this->db->get('desativacao_subclasse')->result();
 	}
 
-	public function get_subclasse_mudancao_nome($subclassecodigo){
+	public function get_subclasse_mudanca_nome($subclassecodigo){
 		$this->db->where('subclasse_subclasse_codigo',$subclassecodigo);
 		$this->db->order_by('data');
 		return $this->db->get('mudanca_nome_subclasse')->result();

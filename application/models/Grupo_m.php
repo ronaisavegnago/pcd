@@ -101,7 +101,7 @@ class Grupo_m extends CI_Model{
 		return $this->db->get('desativacao_grupo')->result();
 	}
 
-	public function get_grupo_mudancao_nome($grupocodigo){
+	public function get_grupo_mudanca_nome($grupocodigo){
 		$this->db->where('grupo_grupo_codigo',$grupocodigo);
 		$this->db->order_by('data');
 		return $this->db->get('mudanca_nome_grupo')->result();

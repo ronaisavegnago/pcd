@@ -92,7 +92,7 @@ class Subgrupo_m extends CI_Model{
 		return $this->db->get('desativacao_subgrupo')->result();
 	}
 
-	public function get_subgrupo_mudancao_nome($subgrupocodigo){
+	public function get_subgrupo_mudanca_nome($subgrupocodigo){
 		$this->db->where('subgrupo_subgrupo_codigo',$subgrupocodigo);
 		$this->db->order_by('data');
 		return $this->db->get('mudanca_nome_subgrupo')->result();

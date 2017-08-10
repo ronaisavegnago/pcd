@@ -6,7 +6,7 @@
     	<meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
     	<meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
     	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
-		<title>PCD Creator</title>
+		<title>Elaborador de PCD</title>
 		<meta name="description" content="Islen Calçados">
 	    <meta name="author" content="Ronai Savegnago Ribeiro">
 	    <meta name="robots" content="noindex,nofollow">

@@ -93,8 +93,8 @@ $this->load->view('menu');
 		</div>
 
 		<div class="ls-box-filter">
-			<a href="<?php echo base_url('Home_c/csv');?>" class="ls-btn-primary">Exportar para CSV</a>
-			<a href="<?php echo base_url('Home_c/json');?>" class="ls-btn-primary">Exportar para JSON</a>
+			<!-- <a href="<?php echo base_url('Home_c/csv');?>" class="ls-btn-primary">Exportar para CSV</a> -->
+			<!-- <a href="<?php echo base_url('Home_c/json');?>" class="ls-btn-primary">Exportar para JSON</a> -->
 			<a href="<?php echo base_url('Home_c/xml');?>" class="ls-btn-primary">Exportar para XML</a>
 		</div>
 

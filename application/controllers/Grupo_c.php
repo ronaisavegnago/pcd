@@ -104,7 +104,7 @@ class Grupo_c extends CI_Controller {
 		$data['extincao'] = $this->grupo->get_grupo_extinto($grupocodigo);
 		$data['desativacao'] = $this->grupo->get_grupo_desativacao($grupocodigo);
 		$data['reativacao'] = $this->grupo->get_grupo_reativacao($grupocodigo);
-		$data['mudanca_nome'] = $this->grupo->get_grupo_mudancao_nome($grupocodigo);
+		$data['mudanca_nome'] = $this->grupo->get_grupo_mudanca_nome($grupocodigo);
 		$this->load->view('grupo/grupo_ver',$data);
 	}
 
