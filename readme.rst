@@ -1,70 +1,48 @@
 ###################
-What is CodeIgniter
+Elaborador de plano de classificação de documentos
 ###################
 
-CodeIgniter is an Application Development Framework - a toolkit - for people
-who build web sites using PHP. Its goal is to enable you to develop projects
-much faster than you could if you were writing code from scratch, by providing
-a rich set of libraries for commonly needed tasks, as well as a simple
-interface and logical structure to access these libraries. CodeIgniter lets
-you creatively focus on your project by minimizing the amount of code needed
-for a given task.
+Este software é construído inteiramente em PHP e MySQL, e seu objetivo
+é permitir ao usuário inserir metadados de classes, subclasses, grupos e subgrupos
+para visualizar o plano de classificação e ter a possibilidade de exportá-lo em no formato XML.
+
+Software produzido por Ronai Savegnago Ribeiro e Marcelo Brondani, ambod mestrandos no Programa 
+de Pós-Graduação em Patrimônio Cultural da Universidade Federal de Santa Maria e integrantes do
+grupo de pesquisa Ged/A, sob orientação do Prof. Dr. Daniel Flores.
 
 *******************
-Release Information
+Informação de versão
 *******************
 
-This repo contains in-development code for future releases. To download the
-latest stable release please visit the `CodeIgniter Downloads
-<https://codeigniter.com/download>`_ page.
+Esta é a primeira versão do software, logo podem ocorrer algumas falhas ou bugs, que poderão ser reportadas
+na seção de Issues.
 
 **************************
-Changelog and New Features
+Changelog e novas funcionalidades
 **************************
 
-You can find a list of all changes for each release in the `user
-guide change log <https://github.com/bcit-ci/CodeIgniter/blob/develop/user_guide_src/source/changelog.rst>`_.
+Para a próxima versão, denominada Release Candidate, será implementado a funcionalidade de importar o plano de classificação
+no formato XML e manipulá-lo no próprio software.
 
 *******************
-Server Requirements
+Requisitos
 *******************
 
-PHP version 5.6 or newer is recommended.
-
-It should work on 5.3.7 as well, but we strongly advise you NOT to run
-such old versions of PHP, because of potential security and performance
-issues, as well as missing features.
+É necessário no mínimo a versão 5.6 do PHP e MySQL 5.6.
+O servidor web Apache também é necessário, visto o ambiente de execução do software.
 
 ************
 Installation
 ************
 
-Please see the `installation section <https://codeigniter.com/user_guide/installation/index.html>`_
-of the CodeIgniter User Guide.
+De forma mais simplificada é possível baixar e instalar o `XAMPP <https://www.apachefriends.org/pt_br/index.html>`,
+que contém o PHP, MySQL e o servidor de páginas web Apache.
 
-*******
-License
-*******
-
-Please see the `license
-agreement <https://github.com/bcit-ci/CodeIgniter/blob/develop/user_guide_src/source/license.rst>`_.
 
 *********
-Resources
+Recursos
 *********
 
--  `User Guide <https://codeigniter.com/docs>`_
--  `Language File Translations <https://github.com/bcit-ci/codeigniter3-translations>`_
--  `Community Forums <http://forum.codeigniter.com/>`_
--  `Community Wiki <https://github.com/bcit-ci/CodeIgniter/wiki>`_
--  `Community IRC <https://webchat.freenode.net/?channels=%23codeigniter>`_
+- Criar, editar, desativar, reativar e extinguir classes, subclasses, grupos e subgrupos do plano de classificação.
+- Exportar todos os dados para o formato XML.
 
-Report security issues to our `Security Panel <mailto:security@codeigniter.com>`_
-or via our `page on HackerOne <https://hackerone.com/codeigniter>`_, thank you.
-
-***************
-Acknowledgement
-***************
-
-The CodeIgniter team would like to thank EllisLab, all the
-contributors to the CodeIgniter project and you, the CodeIgniter user.
