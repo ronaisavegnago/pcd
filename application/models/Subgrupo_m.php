@@ -39,7 +39,7 @@ class Subgrupo_m extends CI_Model{
 	}
 
 	public function get_subgrupo_nome($subgrupocodigo){
-		$this->db->select('subgrupo_nome');
+		$this->db->select('subgrupo_nome,grupo_grupo_codigo');
 		$this->db->where('subgrupo_codigo',$subgrupocodigo);
 		return $this->db->get('subgrupo')->result();
 	}
@@ -111,6 +111,16 @@ class Subgrupo_m extends CI_Model{
 
 	public function count(){
 		return $this->db->count_all_results('subgrupo');
+	}
+
+	public function add_deslocamento($data3){
+		$this->db->insert('deslocamento_subgrupo',$data3);
+	}
+
+	public function get_subgrupo_deslocamento($subgrupo_codigo){
+		$this->db->where('subgrupo_subgrupo_codigo',$subgrupo_codigo);
+		$this->db->order_by('data','asc');
+		return $this->db->get('deslocamento_subgrupo')->result();
 	}
 
 }

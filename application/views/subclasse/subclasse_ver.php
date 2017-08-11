@@ -126,6 +126,37 @@ $this->load->view('menu');
     			</div>
     		</div>
     		<?php } ?>
+    		<?php if(count($deslocamento) != 0){?>
+    		<div class="col-md-12">
+    			<div class="ls-box-filter">
+    				<legend>Deslocamento da subclasse</legend>
+    				<table class="ls-table">
+						<thead>
+							<tr>
+						    	<th>Data</th>
+						    	<th>Hora</th>
+						    	<th>Responsável</th>
+						    	<th>Subordinação anterior</th>
+					    	</tr>
+					  	</thead>
+					  	<tbody>
+		    			<?php
+		    			$td = '';
+		    				foreach($deslocamento as $m){
+		    					$td = '<tr>'.
+		    							'<td>'.$m->data.'</td>'.
+		    							'<td>'.$m->hora.'</td>'.
+		    							'<td>'.$m->responsavel.'</td>'.
+		    							'<td>'.$m->subordinacao_anterior.'</td>'.
+		    						'</tr>';
+		    						echo $td;
+		    				}
+		    			?>
+		    			</tbody>
+		    		</table>
+    			</div>
+    		</div>
+    		<?php } ?>
 
     	</div>
     </div>

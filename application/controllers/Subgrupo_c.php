@@ -17,7 +17,7 @@ class Subgrupo_c extends CI_Controller {
 	}
 
 	public function novo(){
-		$data['grupos'] = $this->subclasse_select($this->grupo->get_grupos_ativos());
+		$data['grupos'] = $this->grupo_select($this->grupo->get_grupos_ativos());
 		$this->load->view('subgrupo/novo_subgrupo',$data);
 	}
 
@@ -37,7 +37,7 @@ class Subgrupo_c extends CI_Controller {
 
 	public function edita($subgrupocodigo){
 		$data['subgrupo'] = $this->subgrupo->get_subgrupo_codigo($subgrupocodigo);
-		$data['grupo'] = $this->subclasse_select($this->grupo->get_grupos());
+		$data['grupos'] = $this->grupo_select($this->grupo->get_grupos_ativos());
 		$this->load->view('subgrupo/edita_subgrupo',$data);
 	}
 
@@ -54,6 +54,15 @@ class Subgrupo_c extends CI_Controller {
 			$data2['nome_anterior'] = $nome[0]->subgrupo_nome;
 			$data2['subgrupo_subgrupo_codigo'] = $subgrupocodigo;
 			$this->subgrupo->add_mudanca_nome($data2);
+		}
+		if($nome[0]->grupo_grupo_codigo != $this->input->post('grupo')){
+			$grupo_nome = $this->grupo->get_grupo_nome($nome[0]->grupo_grupo_codigo);
+			$data3['data'] = date("Y-m-d");
+			$data3['hora'] = date("h:m:s");
+			$data3['responsavel'] = "user";
+			$data3['subordinacao_anterior'] = $grupo_nome[0]->grupo_nome;
+			$data3['subgrupo_subgrupo_codigo'] = $subgrupocodigo;
+			$this->subgrupo->add_deslocamento($data3);
 		}
 		$this->subgrupo->edita_subgrupo($data,$subgrupocodigo);
 		redirect(base_url('subgrupo_c/index'));
@@ -92,11 +101,12 @@ class Subgrupo_c extends CI_Controller {
 		$data['desativacao'] = $this->subgrupo->get_subgrupo_desativacao($subgrupocodigo);
 		$data['reativacao'] = $this->subgrupo->get_subgrupo_reativacao($subgrupocodigo);
 		$data['mudanca_nome'] = $this->subgrupo->get_subgrupo_mudanca_nome($subgrupocodigo);
+		$data['deslocamento'] = $this->subgrupo->get_subgrupo_deslocamento($subgrupocodigo);
 		$this->load->view('subgrupo/subgrupo_ver',$data);
 	}
 
 
-	public function subclasse_select($grupo){
+	public function grupo_select($grupo){
 		$opt = '<option></option>';
 		foreach($grupo as $g){
 			$opt .= '<option value="'.$g->grupo_codigo.'">'.$g->grupo_codigo.' - '.$g->grupo_nome.'</option>';

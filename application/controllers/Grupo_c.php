@@ -37,7 +37,7 @@ class Grupo_c extends CI_Controller {
 
 	public function edita($grupocodigo){
 		$data['grupo'] = $this->grupo->get_grupo_codigo($grupocodigo);
-		$data['subclasses'] = $this->subclasse_select($this->subclasse->get_subclasses());
+		$data['subclasses'] = $this->subclasse_select($this->subclasse->get_subclasses_ativas());
 		$this->load->view('grupo/edita_grupo',$data);
 	}
 
@@ -54,6 +54,15 @@ class Grupo_c extends CI_Controller {
 			$data2['nome_anterior'] = $nome[0]->grupo_nome;
 			$data2['grupo_grupo_codigo'] = $grupocodigo;
 			$this->grupo->add_mudanca_nome($data2);
+		}
+		if($nome[0]->subclasse_subclasse_codigo != $this->input->post('subclasse')){
+			$subclasse_nome = $this->subclasse->get_subclasse_nome($nome[0]->subclasse_subclasse_codigo);
+			$data3['data'] = date("Y-m-d");
+			$data3['hora'] = date("h:m:s");
+			$data3['responsavel'] = "user";
+			$data3['subordinacao_anterior'] = $subclasse_nome[0]->subclasse_nome;
+			$data3['grupo_grupo_codigo'] = $grupocodigo;
+			$this->grupo->add_deslocamento($data3);
 		}
 		$this->grupo->edita_grupo($data,$grupocodigo);
 		redirect(base_url('grupo_c/index'));
@@ -105,6 +114,7 @@ class Grupo_c extends CI_Controller {
 		$data['desativacao'] = $this->grupo->get_grupo_desativacao($grupocodigo);
 		$data['reativacao'] = $this->grupo->get_grupo_reativacao($grupocodigo);
 		$data['mudanca_nome'] = $this->grupo->get_grupo_mudanca_nome($grupocodigo);
+		$data['deslocamento'] = $this->grupo->get_grupo_deslocamento($grupocodigo);
 		$this->load->view('grupo/grupo_ver',$data);
 	}
 

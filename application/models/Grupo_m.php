@@ -26,7 +26,7 @@ class Grupo_m extends CI_Model{
 	public function get_grupos_ativos(){
 		return $this->db->query("
 			select g.*,`ag`.*,s.subclasse_nome,s.subclasse_codigo from grupo g
-			inner join abertura_grupo `ag` on ag.grupo_grupo_codigo = g.grupo_codigo
+			inner join abertura_grupo `ag` on `ag`.grupo_grupo_codigo = g.grupo_codigo
 			inner join subclasse s on g.subclasse_subclasse_codigo = s.subclasse_codigo
 			where g.grupo_ativo = 1
 			order by g.grupo_nome asc
@@ -48,7 +48,7 @@ class Grupo_m extends CI_Model{
 	}
 
 	public function get_grupo_nome($grupocodigo){
-		$this->db->select('grupo_nome');
+		$this->db->select('grupo_nome,subclasse_subclasse_codigo');
 		$this->db->where('grupo_codigo',$grupocodigo);
 		return $this->db->get('grupo')->result();
 	}
@@ -120,6 +120,16 @@ class Grupo_m extends CI_Model{
 
 	public function count(){
 		return $this->db->count_all_results('grupo');
+	}
+
+	public function add_deslocamento($data3){
+		$this->db->insert('deslocamento_grupo',$data3);
+	}
+
+	public function get_grupo_deslocamento($grupo_codigo){
+		$this->db->where('grupo_grupo_codigo',$grupo_codigo);
+		$this->db->order_by('data','asc');
+		return $this->db->get('deslocamento_grupo')->result();
 	}
 
 }

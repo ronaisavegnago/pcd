@@ -6,7 +6,7 @@ $this->load->view('menu');
 
 <main class="ls-main">
 	<div class="container-fluid">
-    	<h1 class="ls-title-intro ls-ico-accessibility">Editar Subrupo</h1>
+    	<h1 class="ls-title-intro ls-ico-accessibility">Editar Subgrupo</h1>
 
     	<div class="ls-box-filter">
     		<form action="<?php echo base_url().'subgrupo_c/edita_subgrupo/'.$subgrupo[0]->subgrupo_codigo?>"

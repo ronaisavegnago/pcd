@@ -42,7 +42,7 @@ class Subclasse_m extends CI_Model{
 	}
 
 	public function get_subclasse_nome($subclassecodigo){
-		$this->db->select('subclasse_nome');
+		$this->db->select('subclasse_nome, classe_classe_codigo');
 		$this->db->where('subclasse_codigo',$subclassecodigo);
 		return $this->db->get('subclasse')->result();
 	}
@@ -120,5 +120,15 @@ class Subclasse_m extends CI_Model{
 
 	public function count(){
 		return $this->db->count_all_results('subclasse');
+	}
+
+	public function add_deslocamento($data3){
+		$this->db->insert('deslocamento_subclasse',$data3);
+	}
+
+	public function get_subclasse_deslocamento($subclasse_codigo){
+		$this->db->where('subclasse_subclasse_codigo',$subclasse_codigo);
+		$this->db->order_by('data','asc');
+		return $this->db->get('deslocamento_subclasse')->result();
 	}
 }

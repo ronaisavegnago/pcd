@@ -52,60 +52,71 @@ class Home_c extends CI_Controller {
 	public function xml_return_classe($classe){
 		$xml = '';
 
-		foreach($classe as $c){
-			$xml .= "\t<classe>\n";
-			$xml .= "\t\t<classe_codigo>".$c->classe_codigo."</classe_codigo>\n";
-			$xml .= "\t\t<classe_nome>".$c->classe_nome."</classe_nome>\n";
-			$xml .= "\t\t<classe_subordinacao>".$c->classe_subordinacao."</classe_subordinacao>\n\n";
+		if(count($classe) > 0){
+			foreach($classe as $c){
+				$xml .= "\t<classe>\n";
+				$xml .= "\t\t<classe_codigo>".$c->classe_codigo."</classe_codigo>\n";
+				$xml .= "\t\t<classe_nome>".$c->classe_nome."</classe_nome>\n";
+				$xml .= "\t\t<classe_subordinacao>".$c->classe_subordinacao."</classe_subordinacao>\n\n";
 
-			$registro_abertura = $this->classe->get_classe_abertura($c->classe_codigo);
-			$xml .= "\t\t<registro_abertura>\n";
-			$xml .= "\t\t\t<data>".$registro_abertura[0]->data."</data>\n";
-			$xml .= "\t\t\t<hora>".$registro_abertura[0]->hora."</hora>\n";
-			$xml .= "\t\t\t<responsavel>".$registro_abertura[0]->responsavel."</responsavel>\n";
-			$xml .= "\t\t</registro_abertura>\n\n";
-			unset($registro_abertura);
+				$registro_abertura = $this->classe->get_classe_abertura($c->classe_codigo);
+				$xml .= "\t\t<registro_abertura>\n";
+				$xml .= "\t\t\t<data>".$registro_abertura[0]->data."</data>\n";
+				$xml .= "\t\t\t<hora>".$registro_abertura[0]->hora."</hora>\n";
+				$xml .= "\t\t\t<responsavel>".$registro_abertura[0]->responsavel."</responsavel>\n";
+				$xml .= "\t\t</registro_abertura>\n\n";
+				unset($registro_abertura);
 
-			$desativacao = $this->classe->get_classe_desativacao($c->classe_codigo);
-			foreach($desativacao as $d){
-				$xml .= "\t\t<registro_desativacao>\n";
-				$xml .= "\t\t\t<data>".$d->data."</data>\n";
-				$xml .= "\t\t\t<hora>".$d->hora."</hora>\n";
-				$xml .= "\t\t\t<responsavel>".$d->responsavel."</responsavel>\n";
-				$xml .= "\t\t</registro_desativacao>\n\n";
+				
+				$desativacao = $this->classe->get_classe_desativacao($c->classe_codigo);
+				if(count($desativacao) > 0){
+					foreach($desativacao as $d){
+						$xml .= "\t\t<registro_desativacao>\n";
+						$xml .= "\t\t\t<data>".$d->data."</data>\n";
+						$xml .= "\t\t\t<hora>".$d->hora."</hora>\n";
+						$xml .= "\t\t\t<responsavel>".$d->responsavel."</responsavel>\n";
+						$xml .= "\t\t</registro_desativacao>\n\n";
+					}
+				unset($desativacao);
+				}
+
+				$reativacao = $this->classe->get_classe_reativacao($c->classe_codigo);
+				if(count($reativacao) > 0){
+					foreach($reativacao as $r){
+						$xml .= "\t\t<reativacao_classe>\n";
+						$xml .= "\t\t\t<data>".$r->data."</data>\n";
+						$xml .= "\t\t\t<hora>".$r->hora."</hora>\n";
+						$xml .= "\t\t\t<responsavel>".$r->responsavel."</responsavel>\n";
+						$xml .= "\t\t</reativacao_classe>\n\n";
+					}
+				unset($reativacao);
+				}
+
+				$mudanca_nome = $this->classe->get_classe_mudancao_nome($c->classe_codigo);
+				if(count($mudanca_nome) > 0){
+					foreach($mudanca_nome as $m){
+						$xml .= "\t\t<registro_mudanca_nome_classe>\n";
+						$xml .= "\t\t\t<data>".$m->data."</data>\n";
+						$xml .= "\t\t\t<hora>".$m->hora."</hora>\n";
+						$xml .= "\t\t\t<responsavel>".$m->responsavel."</responsavel>\n";
+						$xml .= "\t\t\t<nome_anterior>".$m->nome_anterior."</nome_anterior>\n";
+						$xml .= "\t\t</registro_mudanca_nome_classe>\n\n";
+					}
+				}
+				unset($mudanca_nome);
+
+				$extincao = $this->classe->get_classe_extinta($c->classe_codigo);
+				if(count($extincao) > 0){
+					$xml .= "\t\t<registro_extincao>\n";
+					$xml .= "\t\t\t<data>".$extincao[0]->data."</data>\n";
+					$xml .= "\t\t\t<hora>".$extincao[0]->hora."</hora>\n";
+					$xml .= "\t\t\t<responsavel>".$extincao[0]->responsavel."</responsavel>\n";
+					$xml .= "\t\t</registro_extincao>\n\n";
+				}
+				unset($extincao);
+
+				$xml .= "\t</classe>\n\n";
 			}
-			unset($desativacao);
-
-			$reativacao = $this->classe->get_classe_reativacao($c->classe_codigo);
-			foreach($reativacao as $r){
-				$xml .= "\t\t<reativacao_classe>\n";
-				$xml .= "\t\t\t<data>".$r->data."</data>\n";
-				$xml .= "\t\t\t<hora>".$r->hora."</hora>\n";
-				$xml .= "\t\t\t<responsavel>".$r->responsavel."</responsavel>\n";
-				$xml .= "\t\t</reativacao_classe>\n\n";
-			}
-			unset($reativacao);
-
-			$mudanca_nome = $this->classe->get_classe_mudancao_nome($c->classe_codigo);
-			foreach($mudanca_nome as $m){
-				$xml .= "\t\t<registro_mudanca_nome_classe>\n";
-				$xml .= "\t\t\t<data>".$m->data."</data>\n";
-				$xml .= "\t\t\t<hora>".$m->hora."</hora>\n";
-				$xml .= "\t\t\t<responsavel>".$m->responsavel."</responsavel>\n";
-				$xml .= "\t\t\t<nome_anterior>".$m->nome_anterior."</nome_anterior>\n";
-				$xml .= "\t\t</registro_mudanca_nome_classe>\n\n";
-			}
-			unset($mudanca_nome);
-
-			$extincao = $this->classe->get_classe_extinta($c->classe_codigo);
-			$xml .= "\t\t<registro_extincao>\n";
-			$xml .= "\t\t\t<data>".$extincao[0]->data."</data>\n";
-			$xml .= "\t\t\t<hora>".$extincao[0]->hora."</hora>\n";
-			$xml .= "\t\t\t<responsavel>".$extincao[0]->responsavel."</responsavel>\n";
-			$xml .= "\t\t</registro_extincao>\n\n";
-			unset($extincao);
-
-			$xml .= "\t</classe>\n\n";
 		}
 
 		return $xml;
@@ -130,6 +141,7 @@ class Home_c extends CI_Controller {
 					$xml .= "\t\t\t<responsavel>".$r->responsavel."</responsavel>\n";
 					$xml .= "\t\t</registro_abertura>\n\n";
 				}
+				unset($registro_abertura);
 
 				$registro_desativacao = $this->subclasse->get_subclasse_desativacao($s->subclasse_codigo);
 				if(count($registro_desativacao) > 0){
@@ -141,6 +153,7 @@ class Home_c extends CI_Controller {
 						$xml .= "\t\t</registro_desativacao>\n\n";
 					}
 				}
+				unset($registro_desativacao);
 
 				$reativacao_subclasse = $this->subclasse->get_subclasse_reativacao($s->subclasse_codigo);
 				if(count($reativacao_subclasse) > 0){
@@ -152,6 +165,7 @@ class Home_c extends CI_Controller {
 						$xml .= "\t\t</reativacao_subclasse>\n\n";
 					}
 				}
+				unset($reativacao_subclasse);
 
 				$registro_mudanca_nome_subclasse = $this->subclasse->get_subclasse_mudanca_nome($s->subclasse_codigo);
 				if(count($registro_mudanca_nome_subclasse) > 0){
@@ -161,9 +175,21 @@ class Home_c extends CI_Controller {
 						$xml .= "\t\t\t<hora>".$r->hora."</hora>\n";
 						$xml .= "\t\t\t<responsavel>".$r->responsavel."</responsavel>\n";
 						$xml .= "\t\t\t<nome_anterior>".$r->nome_anterior."</nome_anterior>\n";
-						$xml .= "\t\t</registro_mudanca_nome_subclasse>\n";
+						$xml .= "\t\t</registro_mudanca_nome_subclasse>\n\n";
 					}
 				}
+				unset($registro_mudanca_nome_subclasse);
+
+				$deslocamento = $this->subclasse->get_subclasse_deslocamento($s->subclasse_codigo);
+				foreach($deslocamento as $d){
+					$xml .= "\t\t<registro_deslocamento_subclasse>\n";
+					$xml .= "\t\t\t<data>".$d->data."</data>\n";
+					$xml .= "\t\t\t<hora>".$d->hora."</hora>\n";
+					$xml .= "\t\t\t<responsavel>".$d->responsavel."</responsavel>\n";
+					$xml .= "\t\t\t<subordinacao_anterior>".$d->subordinacao_anterior."</subordinacao_anterior>\n";
+					$xml .= "\t\t</registro_deslocamento_subclasse>\n\n";
+				}
+				unset($deslocamento);
 
 				$registro_extincao = $this->subclasse->get_subclasse_extinta($s->subclasse_codigo);
 				if(count($registro_extincao) > 0){
@@ -175,6 +201,7 @@ class Home_c extends CI_Controller {
 						$xml .= "\t\t</registro_extincao>\n\n";
 					}
 				}
+				unset($registro_extincao);
 				$xml .= "\t</subclasse>\n\n";
 			}
 		}
@@ -201,6 +228,7 @@ class Home_c extends CI_Controller {
 					$xml .= "\t\t\t<responsavel>".$r->responsavel."</responsavel>\n";
 					$xml .= "\t\t</registro_abertura>\n\n";
 				}
+				unset($registro_abertura);
 
 				$registro_desativacao = $this->grupo->get_grupo_desativacao($s->grupo_codigo);
 				if(count($registro_desativacao) > 0){
@@ -212,6 +240,7 @@ class Home_c extends CI_Controller {
 						$xml .= "\t\t</registro_desativacao>\n\n";
 					}
 				}
+				unset($registro_desativacao);
 
 				$reativacao_grupo = $this->grupo->get_grupo_reativacao($s->grupo_codigo);
 				if(count($reativacao_grupo) > 0){
@@ -223,6 +252,7 @@ class Home_c extends CI_Controller {
 						$xml .= "\t\t</reativacao_grupo>\n\n";
 					}
 				}
+				unset($reativacao_grupo);
 
 				$registro_mudanca_nome_grupo = $this->grupo->get_grupo_mudanca_nome($s->grupo_codigo);
 				if(count($registro_mudanca_nome_grupo) > 0){
@@ -232,9 +262,21 @@ class Home_c extends CI_Controller {
 						$xml .= "\t\t\t<hora>".$r->hora."</hora>\n";
 						$xml .= "\t\t\t<responsavel>".$r->responsavel."</responsavel>\n";
 						$xml .= "\t\t\t<nome_anterior>".$r->nome_anterior."</nome_anterior>\n";
-						$xml .= "\t\t</registro_mudanca_nome_grupo>\n";
+						$xml .= "\t\t</registro_mudanca_nome_grupo>\n\n";
 					}
 				}
+				unset($registro_mudanca_nome_grupo);
+
+				$deslocamento = $this->grupo->get_grupo_deslocamento($s->grupo_codigo);
+				foreach($deslocamento as $d){
+					$xml .= "\t\t<registro_deslocamento_grupo>\n";
+					$xml .= "\t\t\t<data>".$d->data."</data>\n";
+					$xml .= "\t\t\t<hora>".$d->hora."</hora>\n";
+					$xml .= "\t\t\t<responsavel>".$d->responsavel."</responsavel>\n";
+					$xml .= "\t\t\t<subordinacao_anterior>".$d->subordinacao_anterior."</subordinacao_anterior>\n";
+					$xml .= "\t\t</registro_deslocamento_grupo>\n\n";
+				}
+				unset($deslocamento);
 
 				$registro_extincao = $this->grupo->get_grupo_extinto($s->grupo_codigo);
 				if(count($registro_extincao) > 0){
@@ -246,6 +288,7 @@ class Home_c extends CI_Controller {
 						$xml .= "\t\t</registro_extincao>\n\n";
 					}
 				}
+				unset($registro_extincao);
 				$xml .= "\t</grupo>\n\n";
 			}
 		}
@@ -272,6 +315,7 @@ class Home_c extends CI_Controller {
 					$xml .= "\t\t\t<responsavel>".$r->responsavel."</responsavel>\n";
 					$xml .= "\t\t</registro_abertura>\n\n";
 				}
+				unset($registro_abertura);
 
 				$registro_desativacao = $this->subgrupo->get_subgrupo_desativacao($s->subgrupo_codigo);
 				if(count($registro_desativacao) > 0){
@@ -283,6 +327,7 @@ class Home_c extends CI_Controller {
 						$xml .= "\t\t</registro_desativacao>\n\n";
 					}
 				}
+				unset($registro_desativacao);
 
 				$reativacao_subgrupo = $this->subgrupo->get_subgrupo_reativacao($s->subgrupo_codigo);
 				if(count($reativacao_subgrupo) > 0){
@@ -294,6 +339,7 @@ class Home_c extends CI_Controller {
 						$xml .= "\t\t</reativacao_subgrupo>\n\n";
 					}
 				}
+				unset($reativacao_subgrupo);
 
 				$registro_mudanca_nome_subgrupo = $this->subgrupo->get_subgrupo_mudanca_nome($s->subgrupo_codigo);
 				if(count($registro_mudanca_nome_subgrupo) > 0){
@@ -306,6 +352,18 @@ class Home_c extends CI_Controller {
 						$xml .= "\t\t</registro_mudanca_nome_subgrupo>\n";
 					}
 				}
+				unset($registro_mudanca_nome_subgrupo);
+
+				$deslocamento = $this->subgrupo->get_subgrupo_deslocamento($s->subgrupo_codigo);
+				foreach($deslocamento as $d){
+					$xml .= "\t\t<registro_deslocamento_subgrupo>\n";
+					$xml .= "\t\t\t<data>".$d->data."</data>\n";
+					$xml .= "\t\t\t<hora>".$d->hora."</hora>\n";
+					$xml .= "\t\t\t<responsavel>".$d->responsavel."</responsavel>\n";
+					$xml .= "\t\t\t<subordinacao_anterior>".$d->subordinacao_anterior."</subordinacao_anterior>\n";
+					$xml .= "\t\t</registro_deslocamento_subgrupo>\n\n";
+				}
+				unset($deslocamento);
 
 				$registro_extincao = $this->subgrupo->get_subgrupo_extinto($s->subgrupo_codigo);
 				if(count($registro_extincao) > 0){
@@ -317,6 +375,7 @@ class Home_c extends CI_Controller {
 						$xml .= "\t\t</registro_extincao>\n\n";
 					}
 				}
+				unset($registro_extincao);
 				$xml .= "\t</subgrupo>\n\n";
 			}
 		}

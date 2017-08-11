@@ -38,7 +38,7 @@ class Subclasse_c extends CI_Controller {
 
 	public function edita($subclassecodigo){
 		$data['subclasse'] = $this->subclasse->get_subclasse_codigo($subclassecodigo);
-		$data['classes'] = $this->classe_select($this->classe->get_classes());
+		$data['classes'] = $this->classe_select($this->classe->get_classes_ativas());
 		$this->load->view('subclasse/edita_subclasse',$data);
 	}
 
@@ -54,6 +54,15 @@ class Subclasse_c extends CI_Controller {
 			$data2['nome_anterior'] = $nome[0]->subclasse_nome;
 			$data2['subclasse_subclasse_codigo'] = $subclassecodigo;
 			$this->subclasse->add_mudanca_nome($data2);
+		}
+		if($nome[0]->classe_classe_codigo != $this->input->post('classe')){
+			$classe_nome = $this->classe->get_classe_nome($nome[0]->classe_classe_codigo);
+			$data3['data'] = date("Y-m-d");
+			$data3['hora'] = date("h:m:s");
+			$data3['responsavel'] = "user";
+			$data3['subordinacao_anterior'] = $classe_nome[0]->classe_nome;
+			$data3['subclasse_subclasse_codigo'] = $subclassecodigo;
+			$this->subclasse->add_deslocamento($data3);
 		}
 		$this->subclasse->edita_subclasse($data,$subclassecodigo);
 		redirect(base_url('subclasse_c/index'));
@@ -115,6 +124,7 @@ class Subclasse_c extends CI_Controller {
 		$data['desativacao'] = $this->subclasse->get_subclasse_desativacao($subclassecodigo);
 		$data['reativacao'] = $this->subclasse->get_subclasse_reativacao($subclassecodigo);
 		$data['mudanca_nome'] = $this->subclasse->get_subclasse_mudanca_nome($subclassecodigo);
+		$data['deslocamento'] = $this->subclasse->get_subclasse_deslocamento($subclassecodigo);
 		$this->load->view('subclasse/subclasse_ver',$data);
 	}
 
