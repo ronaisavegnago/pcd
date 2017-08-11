@@ -102,7 +102,7 @@ class Grupo_c extends CI_Controller {
 			$data['data'] = date("y-m-d");
 			$data['hora'] = date("h:m:s");
 			$data['responsavel'] = 'user';
-			$data['subgrupo_subgrupo_codigo'] = $sg->subclasse_codigo;
+			$data['subgrupo_subgrupo_codigo'] = $sg->subgrupo_codigo;
 			$this->subgrupo->extinguir_subgrupo($data);
 		}
 	}

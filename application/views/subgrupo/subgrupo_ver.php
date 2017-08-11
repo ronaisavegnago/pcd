@@ -89,7 +89,7 @@ $this->load->view('menu');
 		    							'<td>'.$m->hora.'</td>'.
 		    							'<td>'.$m->responsavel.'</td>'.
 		    						'</tr>';
-		    						echo $td;
+		    					echo $td;
 		    				}
 		    			?>
 		    			</tbody>
