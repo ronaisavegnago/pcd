@@ -2,8 +2,8 @@
 # Elaborador de plano de classificação de documentos
 
 
-Este software é construído inteiramente em PHP e MySQL, e seu objetivo
-é permitir ao usuário inserir metadados de classes, subclasses, grupos e subgrupos
+Este software é construído inteiramente em PHP e MySQL utilizando o framework web-PHP Codeigniter, em sua versão 3.
+E seu objetivo é permitir ao usuário inserir metadados de classes, subclasses, grupos e subgrupos
 para visualizar o plano de classificação e ter a possibilidade de exportá-lo em no formato XML.
 
 Software produzido por Ronai Savegnago Ribeiro e Marcelo Brondani, ambos mestrandos no Programa 
