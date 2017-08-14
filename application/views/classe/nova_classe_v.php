@@ -8,6 +8,11 @@ $this->load->view('menu');
 	<div class="container-fluid">
     	<h1 class="ls-title-intro ls-ico-accessibility">Nova Classe</h1>
 
+    	<ol class="ls-breadcrumb">
+        	<li><a href="<?php echo base_url()?>">Página inicial</a></li>
+        	<li><a href="<?php echo base_url('classe')?>">Classes</a></li>
+    	</ol>
+
     	<div class="ls-box-filter">
     		<form action="<?php echo base_url().'classe_c/add_classe/'?>"
        			class="ls-form ls-form-horizontal" data-ls-module="form" method="POST">

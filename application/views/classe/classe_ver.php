@@ -7,6 +7,12 @@ $this->load->view('menu');
 <main class="ls-main">
 	<div class="container-fluid">
     	<h1 class="ls-title-intro ls-ico-accessibility">Classe <?php echo $classe[0]->classe_codigo.'/'.$classe[0]->classe_nome?></h1>
+
+    	<ol class="ls-breadcrumb">
+        	<li><a href="<?php echo base_url()?>">Página inicial</a></li>
+        	<li><a href="<?php echo base_url('classe')?>">Classes</a></li>
+    	</ol>
+
     	<?php
     		if($classe[0]->classe_ativa == 1){
     			echo '<div class="ls-alert-info">Classe Ativa</div>';

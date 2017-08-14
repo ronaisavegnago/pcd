@@ -7,6 +7,12 @@ $this->load->view('menu');
 <main class="ls-main">
 	<div class="container-fluid">
     	<h1 class="ls-title-intro ls-ico-accessibility">Subclasse <?php echo $subclasse[0]->subclasse_codigo.'/'.$subclasse[0]->subclasse_nome?></h1>
+
+    	<ol class="ls-breadcrumb">
+        	<li><a href="<?php echo base_url()?>">Página inicial</a></li>
+        	<li><a href="<?php echo base_url('subclasse')?>">Subclasses</a></li>
+    	</ol>
+
     	<?php
     		if($subclasse[0]->subclasse_ativa == 1){
     			echo '<div class="ls-alert-info">Subclasse Ativa</div>';

@@ -7,6 +7,12 @@ $this->load->view('menu');
 <main class="ls-main">
 	<div class="container-fluid">
     	<h1 class="ls-title-intro ls-ico-accessibility">Subgrupo <?php echo $subgrupo[0]->subgrupo_codigo.'/'.$subgrupo[0]->subgrupo_nome?></h1>
+
+    	<ol class="ls-breadcrumb">
+        	<li><a href="<?php echo base_url()?>">Página inicial</a></li>
+        	<li><a href="<?php echo base_url('subgrupos')?>">Subgrupos</a></li>
+    	</ol>
+
     	<?php
     		if($subgrupo[0]->subgrupo_ativo == 1){
     			echo '<div class="ls-alert-info">Grupo Ativo</div>';

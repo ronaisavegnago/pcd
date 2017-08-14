@@ -137,7 +137,7 @@ class Grupo_c extends CI_Controller {
 				$ativa = '<span class="ls-tag-danger">Extinto</span>';
 			}
 			$td .= '<tr>'.
-					'<td>'.'<a href="'.base_url('grupo_c/ver/'.$g->grupo_codigo).'">'.$g->grupo_codigo.'</a>'.'</td>'.
+					'<td>'.'<a href="'.base_url('grupo/'.$g->grupo_codigo).'">'.$g->grupo_codigo.'</a>'.'</td>'.
 					'<td>'.$g->grupo_nome.'</td>'.
 					'<td>'.$g->data.'</td>'.
 					'<td>'.$g->subclasse_nome.'</td>'.
@@ -146,10 +146,10 @@ class Grupo_c extends CI_Controller {
 						'<div data-ls-module="dropdown" class="ls-dropdown">
                                 <a href="#" class="ls-btn-primary">Ação</a>
                                 <ul class="ls-dropdown-nav">'.
-                                	'<li><a href="'.base_url('grupo_c/edita/'.$g->grupo_codigo).'"><span class="ls-ico-edit-admin ls-ico-left">Editar</span></a></li>'.
+                                	'<li><a href="'.base_url('grupo/editar/'.$g->grupo_codigo).'"><span class="ls-ico-edit-admin ls-ico-left">Editar</span></a></li>'.
                                 	'<li><a href="'.base_url('grupo_c/desativa/'.$g->grupo_codigo).'"><span class="ls-ico-edit-admin ls-ico-left">Desativar</span></a></li>'.
                                 	'<li><a href="'.base_url('grupo_c/reativa/'.$g->grupo_codigo).'"><span class="ls-ico-edit-admin ls-ico-left">Reativar</span></a></li>'.
-                                	'<li><a href="'.base_url('grupo_c/extinguir/'.$g->grupo_codigo).'"><span class="ls-ico-edit-admin ls-ico-left">Extinguir</span></a></li>'.
+                                	'<li><a href="'.base_url('grupo/extinguir/'.$g->grupo_codigo).'"><span class="ls-ico-edit-admin ls-ico-left">Extinguir</span></a></li>'.
                                 '</ul>
                             </div>'
 					.'</td>'.

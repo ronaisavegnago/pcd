@@ -6,9 +6,14 @@ $this->load->view('menu');
 
 <main class="ls-main">
 	<div class="container-fluid">
+	<ol class="ls-breadcrumb">
+        <li><a href="<?php echo base_url('classe')?>">Classes</a></li>
+        <li><a href="<?php echo base_url('subclasse')?>">Subclasses</a></li>
+        <li><a href="<?php echo base_url('grupo')?>">Grupos</a></li>
+        <li><a href="<?php echo base_url('subgrupo')?>">Subgrupos</a></li>
+    </ol>
 		<div class="ls-box ls-board-box">
-			<div id="sending-stats" class="row">
-				
+			<div id="sending-stats" class="row">				
 				<div class="col-sm-6 col-md-3">
 					<div class="ls-box">
 						<div class="ls-box-head">
@@ -22,7 +27,7 @@ $this->load->view('menu');
 							</span>
 						</div>
 						<div class="ls-box-footer">
-							<a href="<?php echo base_url('Classe_c/index') ?>" class="ls-btn ls-btn-xs">
+							<a href="<?php echo base_url('classe') ?>" class="ls-btn ls-btn-xs">
 								Ver classes
 							</a>
 						</div>
@@ -42,7 +47,7 @@ $this->load->view('menu');
 							</span>
 						</div>
 						<div class="ls-box-footer">
-							<a href="<?php echo base_url('Subclasse_c/index') ?>" class="ls-btn ls-btn-xs">
+							<a href="<?php echo base_url('subclasse') ?>" class="ls-btn ls-btn-xs">
 								Ver subclasses
 							</a>
 						</div>
@@ -62,7 +67,7 @@ $this->load->view('menu');
 							</span>
 						</div>
 						<div class="ls-box-footer">
-							<a href="<?php echo base_url('Grupo_c/index') ?>" class="ls-btn ls-btn-xs">
+							<a href="<?php echo base_url('grupo') ?>" class="ls-btn ls-btn-xs">
 								Ver grupos
 							</a>
 						</div>
@@ -82,7 +87,7 @@ $this->load->view('menu');
 							</span>
 						</div>
 						<div class="ls-box-footer">
-							<a href="<?php echo base_url('Subgrupo_c/index') ?>" class="ls-btn ls-btn-xs">
+							<a href="<?php echo base_url('subgrupo') ?>" class="ls-btn ls-btn-xs">
 								Ver subgrupos
 							</a>
 						</div>

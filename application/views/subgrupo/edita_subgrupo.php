@@ -8,6 +8,12 @@ $this->load->view('menu');
 	<div class="container-fluid">
     	<h1 class="ls-title-intro ls-ico-accessibility">Editar Subgrupo</h1>
 
+      <ol class="ls-breadcrumb">
+          <li><a href="<?php echo base_url()?>">Página inicial</a></li>
+          <li><a href="<?php echo base_url('subgrupo')?>">Subgrupos</a></li>
+          <li><a href="<?php echo base_url('subgrupo/'.$subgrupo[0]->subgrupo_codigo)?>">Subgrupo <?php echo $subgrupo[0]->subgrupo_codigo.'/'.$subgrupo[0]->subgrupo_nome?></a></li>
+      </ol>
+
     	<div class="ls-box-filter">
     		<form action="<?php echo base_url().'subgrupo_c/edita_subgrupo/'.$subgrupo[0]->subgrupo_codigo?>"
        			class="ls-form ls-form-horizontal" data-ls-module="form" method="POST">

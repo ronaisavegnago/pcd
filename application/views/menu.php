@@ -5,29 +5,29 @@
 				<li>
 					<a href="#" class="ls-ico-arrow-down" title="Classe">Classe</a>
 					<ul>
-						<li><a href="<?php echo base_url('classe_c/novo')?>">Adicionar</a></li>
-						<li><a href="<?php echo base_url('classe_c/index')?>">Listar</a></li>
+						<li><a href="<?php echo base_url('classe/adicionar')?>">Adicionar</a></li>
+						<li><a href="<?php echo base_url('classe')?>">Listar</a></li>
 					</ul>
 				</li>
 				<li>
 					<a href="#" class="ls-ico-arrow-down" title="Subclasse">Subclasse</a>
 					<ul>
-						<li><a href="<?php echo base_url('subclasse_c/novo')?>">Adicionar</a></li>
-						<li><a href="<?php echo base_url('subclasse_c/index')?>">Listar</a></li>
+						<li><a href="<?php echo base_url('subclasse/adicionar')?>">Adicionar</a></li>
+						<li><a href="<?php echo base_url('subclasse')?>">Listar</a></li>
 					</ul>
 				</li>
 				<li>
 					<a href="#" class="ls-ico-arrow-down" title="Grupo">Grupo</a>
 					<ul>
-						<li><a href="<?php echo base_url('grupo_c/novo')?>">Adicionar</a></li>
-						<li><a href="<?php echo base_url('grupo_c/index')?>">Listar</a></li>
+						<li><a href="<?php echo base_url('grupo/adicionar')?>">Adicionar</a></li>
+						<li><a href="<?php echo base_url('grupo/')?>">Listar</a></li>
 					</ul>
 				</li>
 				<li>
 					<a href="#" class="ls-ico-arrow-down" title="Subgrupo">Subgrupo</a>
 					<ul>
-						<li><a href="<?php echo base_url('subgrupo_c/novo')?>">Adicionar</a></li>
-						<li><a href="<?php echo base_url('subgrupo_c/index')?>">Listar</a></li>
+						<li><a href="<?php echo base_url('subgrupo/adicionar')?>">Adicionar</a></li>
+						<li><a href="<?php echo base_url('subgrupo/')?>">Listar</a></li>
 					</ul>
 				</li>
 			</ul>

@@ -8,6 +8,11 @@ $this->load->view('menu');
 	<div class="container-fluid">
     	<h1 class="ls-title-intro ls-ico-accessibility">Novo Grupo</h1>
 
+      <ol class="ls-breadcrumb">
+          <li><a href="<?php echo base_url()?>">Página inicial</a></li>
+          <li><a href="<?php echo base_url('grupo')?>">Grupos</a></li>
+      </ol>
+
     	<div class="ls-box-filter">
     		<form action="<?php echo base_url().'grupo_c/add_grupo/'?>"
        			class="ls-form ls-form-horizontal" data-ls-module="form" method="POST">

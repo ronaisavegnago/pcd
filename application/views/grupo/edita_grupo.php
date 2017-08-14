@@ -8,6 +8,12 @@ $this->load->view('menu');
 	<div class="container-fluid">
     	<h1 class="ls-title-intro ls-ico-accessibility">Editar Grupo</h1>
 
+      <ol class="ls-breadcrumb">
+          <li><a href="<?php echo base_url()?>">Página inicial</a></li>
+          <li><a href="<?php echo base_url('grupo')?>">Grupos</a></li>
+          <li><a href="<?php echo base_url('grupo/'.$grupo[0]->grupo_codigo)?>">Grupo <?php echo $grupo[0]->grupo_codigo.'/'.$grupo[0]->grupo_nome?></a></li>
+      </ol>
+
     	<div class="ls-box-filter">
     		<form action="<?php echo base_url().'grupo_c/edita_grupo/'.$grupo[0]->grupo_codigo?>"
        			class="ls-form ls-form-horizontal" data-ls-module="form" method="POST">

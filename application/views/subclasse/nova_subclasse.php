@@ -8,6 +8,11 @@ $this->load->view('menu');
 	<div class="container-fluid">
     	<h1 class="ls-title-intro ls-ico-accessibility">Nova Subclasse</h1>
 
+      <ol class="ls-breadcrumb">
+          <li><a href="<?php echo base_url()?>">Página inicial</a></li>
+          <li><a href="<?php echo base_url('subclasse')?>">Subclasses</a></li>
+      </ol>
+
     	<div class="ls-box-filter">
     		<form action="<?php echo base_url().'subclasse_c/add_subclasse/'?>"
        			class="ls-form ls-form-horizontal" data-ls-module="form" method="POST">

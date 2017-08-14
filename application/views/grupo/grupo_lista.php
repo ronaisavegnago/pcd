@@ -8,6 +8,14 @@ $this->load->view('menu');
 	<div class="container-fluid">
     	<h1 class="ls-title-intro ls-ico-accessibility">Grupos</h1>
 
+        <ol class="ls-breadcrumb">
+            <li><a href="<?php echo base_url()?>">Página inicial</a></li>
+            <li><a href="<?php echo base_url('grupo/adicionar')?>">Adicionar grupo</a></li>
+            <li><a href="<?php echo base_url('classe')?>">Classes</a></li>
+            <li><a href="<?php echo base_url('subclasse')?>">Subclasses</a></li>
+            <li><a href="<?php echo base_url('subgrupo')?>">Subgrupos</a></li>
+        </ol>
+
     	<div class="ls-box-filter">
     		<table class="ls-table" id="grupo_datatable" style="text-align:center;">
     			<thead>

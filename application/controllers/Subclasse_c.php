@@ -138,7 +138,7 @@ class Subclasse_c extends CI_Controller {
 				$ativa = '<span class="ls-tag-danger">Extinta</span>';
 			}
 			$td .= '<tr>'.
-					'<td>'.'<a href="'.base_url('subclasse_c/ver/'.$s->subclasse_codigo).'">'.$s->subclasse_codigo.'</a>'.'</td>'.
+					'<td>'.'<a href="'.base_url('subclasse/'.$s->subclasse_codigo).'">'.$s->subclasse_codigo.'</a>'.'</td>'.
 					'<td>'.$s->subclasse_nome.'</td>'.
 					'<td>'.$s->data.'</td>'.
 					'<td>'.$s->classe_nome.'</td>'.
@@ -147,10 +147,10 @@ class Subclasse_c extends CI_Controller {
 						'<div data-ls-module="dropdown" class="ls-dropdown">
                                 <a href="#" class="ls-btn-primary">Ação</a>
                                 <ul class="ls-dropdown-nav">'.
-                                	'<li><a href="'.base_url('subclasse_c/edita/'.$s->subclasse_codigo).'"><span class="ls-ico-edit-admin ls-ico-left">Editar</span></a></li>'.
+                                	'<li><a href="'.base_url('subclasse/editar/'.$s->subclasse_codigo).'"><span class="ls-ico-edit-admin ls-ico-left">Editar</span></a></li>'.
                                 	'<li><a href="'.base_url('subclasse_c/desativa/'.$s->subclasse_codigo).'"><span class="ls-ico-edit-admin ls-ico-left">Desativar</span></a></li>'.
                                 	'<li><a href="'.base_url('subclasse_c/reativa/'.$s->subclasse_codigo).'"><span class="ls-ico-edit-admin ls-ico-left">Reativar</span></a></li>'.
-                                	'<li><a href="'.base_url('subclasse_c/extinguir/'.$s->subclasse_codigo).'"><span class="ls-ico-edit-admin ls-ico-left">Extinguir</span></a></li>'.
+                                	'<li><a href="'.base_url('subclasse/extinguir/'.$s->subclasse_codigo).'"><span class="ls-ico-edit-admin ls-ico-left">Extinguir</span></a></li>'.
                                 '</ul>
                             </div>'
 					.'</td>'.

@@ -7,6 +7,13 @@ $this->load->view('menu');
 <main class="ls-main">
 	<div class="container-fluid">
     	<h1 class="ls-title-intro ls-ico-accessibility">Extinguir Grupo</h1>
+
+    	<ol class="ls-breadcrumb">
+        	<li><a href="<?php echo base_url()?>">Página inicial</a></li>
+        	<li><a href="<?php echo base_url('grupo')?>">Grupos</a></li>
+        	<li><a href="<?php echo base_url('grupo/'.$codigo)?>">Grupo <?php echo $codigo?></a></li>
+    	</ol>
+
     	<div class="ls-box-filter">
     		<h2>Deseja realmente extinguir este grupo?</h2>
     		<p style="color: red"><h4>Todas os subgrupos vinculados a este grupo também serão extintos!</h4></p>

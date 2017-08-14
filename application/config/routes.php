@@ -52,3 +52,27 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 $route['default_controller'] = 'home_c';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
+
+$route['classe'] = "Classe_c/index";
+$route['classe/adicionar'] = "Classe_c/novo";
+$route['classe/(:any)'] = "Classe_c/ver/$1";
+$route['classe/editar/(:any)'] = "Classe_c/edita/$1";
+$route['classe/extinguir/(:any)'] = "Classe_c/extinguir/$1";
+
+$route['subclasse'] = "Subclasse_c/index";
+$route['subclasse/adicionar'] = "Subclasse_c/novo";
+$route['subclasse/(:any)'] = "subclasse_c/ver/$1";
+$route['subclasse/editar/(:any)'] = "subclasse_c/editar/$1";
+$route['subclasse/extinguir/(:any)'] = "subclasse_c/extinguir/$1";
+
+$route['grupo'] = "Grupo_c/index";
+$route['grupo/adicionar'] = "Grupo_c/novo";
+$route['grupo/(:any)'] = "Grupo_c/ver/$1";
+$route['grupo/editar/(:any)'] = "Grupo_c/edita/$1";
+$route['grupo/extinguir/(:any)'] = "Grupo_c/extinguir/$1";
+
+$route['subgrupo'] = "Subgrupo_c/index";
+$route['subgrupo/adicionar'] = "Subgrupo_c/novo";
+$route['subclasse/(:any)'] = "Subclasse_c/ver/$1";
+$route['subclasse/editar/(:any)'] = "Subclasse_c/edita/$1";
+$route['subclasse/extinguir/(:any)'] = "Subclasse_c/extinguir/$1";

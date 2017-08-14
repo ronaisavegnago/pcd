@@ -43,7 +43,7 @@ class Home_c extends CI_Controller {
 
 		$xml .= "</classes>";
 
-		$ponteiro = fopen('pcd.xml','w');
+		$ponteiro = fopen('pcd.xml'.date("d-m-y")."-".date("h-i:s"),'w');
 		fwrite($ponteiro, $xml);
 		$ponteiro = fclose($ponteiro);
 		redirect(base_url());
