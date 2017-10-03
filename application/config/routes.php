@@ -76,3 +76,5 @@ $route['subgrupo/adicionar'] = "Subgrupo_c/novo";
 $route['subclasse/(:any)'] = "Subclasse_c/ver/$1";
 $route['subclasse/editar/(:any)'] = "Subclasse_c/edita/$1";
 $route['subclasse/extinguir/(:any)'] = "Subclasse_c/extinguir/$1";
+$route['home/xml'] = "Home_c/xml";
+$route['home/importXml'] = "Home_c/importXml";

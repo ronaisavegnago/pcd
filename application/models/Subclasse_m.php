@@ -23,6 +23,12 @@ class Subclasse_m extends CI_Model{
 			")->result();
 	}
 
+	public function get_classe_nome_where($nome){
+		$this->db->select('classe_codigo');
+		$this->db->where('classe_nome',$nome);
+		return $this->db->get('classe')->result();
+	}
+
 	public function get_subclasses_ativas(){
 		return $this->db->query("
 			select s.*,`as`.*,c.classe_nome,c.classe_codigo from subclasse s

@@ -100,7 +100,19 @@ $this->load->view('menu');
 		<div class="ls-box-filter">
 			<!-- <a href="<?php echo base_url('Home_c/csv');?>" class="ls-btn-primary">Exportar para CSV</a> -->
 			<!-- <a href="<?php echo base_url('Home_c/json');?>" class="ls-btn-primary">Exportar para JSON</a> -->
-			<a href="<?php echo base_url('Home_c/xml');?>" class="ls-btn-primary">Exportar para XML</a>
+			<a href="<?php echo base_url('home/xml');?>" class="ls-btn-primary">Exportar para XML</a>
+		</div>
+		<div class="ls-box-filter">
+			<form name="xml" action="<?php echo base_url('home/importXml')?>" enctype="multipart/form-data" class="ls-form-inline row" method="POST">
+				<fieldset>
+					<label>
+						<input type="file" name="XMLfile" size="40" class="ls-btn">
+					</label>
+					<div class="ls-actions-btn">
+						<button class="ls-btn-primary">Importar XML</button>
+					</div>
+				</fieldset>				
+			</form>
 		</div>
 
 		<div class="ls-box-filter">

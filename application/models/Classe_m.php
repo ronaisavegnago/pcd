@@ -31,6 +31,14 @@ class Classe_m extends CI_Model{
 		")->result();
 	}
 
+	public function insere_desativacao($data){
+		$this->db->insert('desativacao_classe',$data);
+	}
+
+	public function insere_reativacao($data){
+		$this->db->insert('reativacao_classe',$data);
+	}
+
 	public function desativa($classecodigo){
 		$data2['data'] = date("y-m-d");
 		$data2['hora'] = date("h:m:s");

@@ -31,6 +31,15 @@ class Home_c extends CI_Controller {
 		$grupo = $this->grupo->get_grupos();
 		$subgrupo = $this->subgrupo->get_subgrupos();
 
+		header('Content-Description: File Transfer');
+		header('Content-Disposition: attachment; filename="'.'pcd.xml'.'"');
+		header('Content-Type: application/octet-stream');
+		header('Content-Transfer-Encoding: binary');
+		header('Content-Length: ' . filesize($ponteiro));
+		header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
+		header('Pragma: public');
+		header('Expires: 0');
+
 		$xml = "<?xml version='1.0' encoding='UTF-8'?>\n";
 		$xml .= "<classes> \n";
 
@@ -43,10 +52,95 @@ class Home_c extends CI_Controller {
 
 		$xml .= "</classes>";
 
-		$ponteiro = fopen('pcd.xml'.date("d-m-y")."-".date("h-i:s"),'w');
+		$ponteiro = fopen('pcd'.date("d-m-y").'.xml'."-".date("h-i:s"),'w');
 		fwrite($ponteiro, $xml);
+		readfile($ponteiro);
 		$ponteiro = fclose($ponteiro);
 		redirect(base_url());
+	}
+
+	public function importXml(){
+		$config['upload_path'] = './upload/';
+		$config['allowed_types'] = 'xml|json|csv';
+		$config['max_size']	= '0';
+		$config['max_width']  = '0';
+		$config['max_height']  = '0';
+		$this->load->library('upload', $config);
+
+		if(!$this->upload->do_upload('XMLfile')){
+			$error = array('error' => $this->upload->display_errors());
+			print_r($error);
+		}else{
+			$data2 = array('upload_data' => $this->upload->data());
+			$xml = simplexml_load_file(base_url('upload/'.$data2['upload_data']['file_name']));
+			
+			// echo '<pre>';
+			// print_r($xml);
+			// echo '</pre>';			
+
+			foreach($xml as $x){
+				if($x->classe_codigo){
+					$data['classe_codigo'] = $x->classe_codigo;
+					$data['classe_nome'] = $x->classe_nome;
+					$data['classe_ativa'] = 1;
+					$data['classe_subordinacao'] = '';
+					//$this->classe->add_classe($data);
+					unset($data);
+
+					$data['data'] = $x->registro_abertura->data;
+					$data['hora'] = $x->registro_abertura->hora;
+					$data['responsavel'] = $x->registro_abertura->responsavel;
+					$data['classe_classe_codigo'] = $x->classe_codigo;
+					//$this->classe->add_data_abertura($data);
+					unset($data);
+
+					if($x->registro_desativacao){
+						foreach($x->registro_desativacao as $rd){
+							$data['data'] = $rd->data;
+							$data['hora'] = $rd->hora;
+							$data['responsavel'] = $rd->responsavel;
+							$data['classe_classe_codigo'] = $x->classe_codigo;
+							// $this->classe->insere_desativacao($data);
+							unset($data);
+						}
+					}
+
+					if($x->reativacao_classe){
+						foreach($x->reativacao_classe as $rc){
+							$data['data'] = $rc->data;
+							$data['hora'] = $rc->hora;
+							$data['responsavel'] = $rc->responsavel;
+							$data['classe_classe_codigo'] = $x->classe_codigo;
+							// $this->classe->insere_reativacao($data);
+							unset($data);	
+						}
+					}
+
+					if($x->registro_extincao){
+						$data['data'] = $x->registro_extincao->data;
+						$data['hora'] = $x->registro_extincao->hora;
+						$data['responsavel'] = $x->registro_extincao->responsavel;
+						$data['classe_classe_codigo'] = $x->classe_codigo;
+						// $this->classe->extinguir_classe($data);
+						unset($data);	
+					}
+
+					if($x->registro_mudanca_nome_classe){
+						foreach($x->registro_mudanca_nome_classe as $nc){
+							$data['data'] = $nc->data;
+							$data['hora'] = $nc->hora;
+							$data['responsavel'] = $nc->responsavel;
+							$data['nome_anterior'] = $nc->nome_anterior;
+							$data['classe_classe_codigo'] = $x->classe_codigo;
+							// $this->classe->add_mudanca_nome($data);
+							print_r($data);
+							echo '<br><br>';
+							unset($data);
+						}
+					}
+				}
+			}
+		}
 	}
 
 	public function xml_return_classe($classe){
@@ -146,11 +240,11 @@ class Home_c extends CI_Controller {
 				$registro_desativacao = $this->subclasse->get_subclasse_desativacao($s->subclasse_codigo);
 				if(count($registro_desativacao) > 0){
 					foreach($registro_desativacao as $r){
-						$xml .= "\t\t<registro_desativacao>\n";
+						$xml .= "\t\t<registro_desativacao_subclasse>\n";
 						$xml .= "\t\t\t<data>".$r->data."</data>\n";
 						$xml .= "\t\t\t<hora>".$r->hora."</hora>\n";
 						$xml .= "\t\t\t<responsavel>".$r->responsavel."</responsavel>\n";
-						$xml .= "\t\t</registro_desativacao>\n\n";
+						$xml .= "\t\t</registro_desativacao_subclasse>\n\n";
 					}
 				}
 				unset($registro_desativacao);

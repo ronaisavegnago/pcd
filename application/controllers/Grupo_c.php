@@ -32,7 +32,7 @@ class Grupo_c extends CI_Controller {
 		$data2['responsavel'] = 'user';
 		$data2['grupo_grupo_codigo'] = $data['grupo_codigo'];
 		$this->grupo->add_abertura($data2);
-		redirect(base_url('Grupo_c/index'));
+		redirect(base_url('grupo'));
 	}
 
 	public function edita($grupocodigo){
@@ -65,17 +65,17 @@ class Grupo_c extends CI_Controller {
 			$this->grupo->add_deslocamento($data3);
 		}
 		$this->grupo->edita_grupo($data,$grupocodigo);
-		redirect(base_url('grupo_c/index'));
+		redirect(base_url('grupo'));
 	}
 
 	public function desativa($grupocodigo){
 		$this->grupo->desativa($grupocodigo);
-		redirect(base_url('grupo_c/index'));
+		redirect(base_url('grupo'));
 	}
 
 	public function reativa($grupocodigo){
 		$this->grupo->reativa($grupocodigo);
-		redirect(base_url('grupo_c/index'));	
+		redirect(base_url('grupo'));	
 	}
 
 	public function extinguir($grupocodigo){
@@ -92,7 +92,7 @@ class Grupo_c extends CI_Controller {
 		$this->grupo->extinguir_grupo($data);
 		unset($data);
 		$this->extincao_derivados($grupocodigo); //extingui subgrupos vinculados
-		redirect(base_url('grupo_c/index'));
+		redirect(base_url('grupo'));
 	}
 
 	public function extincao_derivados($grupocodigo){

@@ -8,7 +8,7 @@
 		<registro_abertura>
 			<data>2017-08-11</data>
 			<hora>04:08:17</hora>
-			<responsavel></responsavel>
+			<responsavel>user</responsavel>
 		</registro_abertura>
 
 		<registro_desativacao>
@@ -31,9 +31,9 @@
 		<classe_subordinacao></classe_subordinacao>
 
 		<registro_abertura>
-			<data>2017-08-11</data>
+			<data>2017-08-12</data>
 			<hora>04:08:29</hora>
-			<responsavel></responsavel>
+			<responsavel>user</responsavel>
 		</registro_abertura>
 
 	</classe>
@@ -95,29 +95,23 @@
 			<responsavel>user</responsavel>
 		</registro_abertura>
 
-		<registro_desativacao>
+		<registro_desativacao_grupo>
 			<data>2017-08-11</data>
 			<hora>04:08:23</hora>
 			<responsavel>user</responsavel>
-		</registro_desativacao>
+		</registro_desativacao_grupo>
 
-		<registro_desativacao>
+		<registro_desativacao_grupo>
 			<data>2017-08-11</data>
 			<hora>05:08:26</hora>
 			<responsavel>user</responsavel>
-		</registro_desativacao>
+		</registro_desativacao_grupo>
 
-		<registro_extincao>
-			<data>2017-08-11</data>
-			<hora>04:08:23</hora>
-			<responsavel>user</responsavel>
-		</registro_extincao>
-
-		<registro_extincao>
+		<registro_extincao_grupo>
 			<data>2017-08-11</data>
 			<hora>05:08:26</hora>
 			<responsavel>user</responsavel>
-		</registro_extincao>
+		</registro_extincao_grupo>
 
 	</grupo>
 
@@ -165,23 +159,23 @@
 			<responsavel>user</responsavel>
 		</registro_abertura>
 
-		<registro_desativacao>
+		<registro_desativacao_subgrupo>
 			<data>2017-08-11</data>
 			<hora>04:08:23</hora>
 			<responsavel>user</responsavel>
-		</registro_desativacao>
+		</registro_desativacao_subgrupo>
 
-		<registro_desativacao>
+		<registro_desativacao_subgrupo>
 			<data>2017-08-11</data>
 			<hora>05:08:26</hora>
 			<responsavel>user</responsavel>
-		</registro_desativacao>
+		</registro_desativacao_subgrupo>
 
-		<registro_extincao>
+		<registro_extincao_subgrupo>
 			<data>2017-08-11</data>
 			<hora>05:08:26</hora>
 			<responsavel>user</responsavel>
-		</registro_extincao>
+		</registro_extincao_subgrupo>
 
 	</subgrupo>
 

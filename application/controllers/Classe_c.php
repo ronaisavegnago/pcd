@@ -40,17 +40,17 @@ class Classe_c extends CI_Controller {
 		$data2['hora'] = date("h:m:s");
 		$data2['classe_classe_codigo'] = $data['classe_codigo'];
 		$this->classe->add_data_abertura($data2);
-		redirect(base_url('Classe_c/index'));
+		redirect(base_url('classe'));
 	}
 
 	public function desativa($classecodigo){
 		$this->classe->desativa($classecodigo);
-		redirect(base_url('Classe_c/index'));
+		redirect(base_url('classe'));
 	}
 
 	public function reativa($classecodigo){
 		$this->classe->reativa($classecodigo);
-		redirect(base_url('Classe_c/index'));	
+		redirect(base_url('classe'));	
 	}
 
 	public function edita($classecodigo){
@@ -61,17 +61,18 @@ class Classe_c extends CI_Controller {
 	public function edita_classe($classecodigo){
 		$data['classe_nome'] = $this->input->post('nome');
 		$data['classe_codigo'] = $this->input->post('codigo');
-		$nome = $this->classe->get_classe_nome($classecodigo);
-		if($nome[0]->classe_nome != $this->input->post('nome')){
+		$classe = $this->classe->get_classe_codigo($classecodigo);
+		if($classe[0]->classe_nome != $this->input->post('nome')){
 			$data2['data'] = date("Y-m-d");
 			$data2['hora'] = date('h:m:s');
 			$data2['responsavel'] = 'user';
-			$data2['nome_anterior'] = $nome[0]->classe_nome;
+			$data2['nome_anterior'] = $classe[0]->classe_nome;
 			$data2['classe_classe_codigo'] = $this->input->post('codigo');
 			$this->classe->add_mudanca_nome($data2);
 		}
+
 		$this->classe->edita_classe($classecodigo,$data);
-		redirect(base_url('classe_c/index'));
+		redirect(base_url('classe'));
 	}
 
 	public function extinguir($classecodigo){
@@ -88,7 +89,7 @@ class Classe_c extends CI_Controller {
 		$this->classe->extinguir_classe($data);
 		unset($data);
 		$this->extincao_derivados($classe_codigo); //extingui subclasses,grupos e subgrupos vinculados
-		redirect(base_url('classe_c/index'));
+		redirect(base_url('classe'));
 	}
 
 	public function extincao_derivados($classe_codigo){

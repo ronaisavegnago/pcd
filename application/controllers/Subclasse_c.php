@@ -32,7 +32,7 @@ class Subclasse_c extends CI_Controller {
 		$data2['responsavel'] = 'user';
 		$data2['subclasse_subclasse_codigo'] = $data['subclasse_codigo'];
 		$this->subclasse->add_abertura($data2);
-		redirect(base_url('Subclasse_c/index'));
+		redirect(base_url('subclasse'));
 	}
 
 
@@ -65,17 +65,17 @@ class Subclasse_c extends CI_Controller {
 			$this->subclasse->add_deslocamento($data3);
 		}
 		$this->subclasse->edita_subclasse($data,$subclassecodigo);
-		redirect(base_url('subclasse_c/index'));
+		redirect(base_url('subclasse'));
 	}
 
 	public function desativa($subclassecodigo){
 		$this->subclasse->desativa($subclassecodigo);
-		redirect(base_url('Subclasse_c/index'));
+		redirect(base_url('subclasse'));
 	}
 
 	public function reativa($subclassecodigo){
 		$this->subclasse->reativa($subclassecodigo);
-		redirect(base_url('Subclasse_c/index'));	
+		redirect(base_url('subclasse'));	
 	}
 
 	public function extinguir($subclassecodigo){
@@ -92,7 +92,7 @@ class Subclasse_c extends CI_Controller {
 		$this->subclasse->extinguir_subclasse($data);
 		unset($data);
 		$this->extincao_derivados($subclasse_codigo); //extingui grupos e subgrupos vinculados
-		redirect(base_url('subclasse_c/index'));
+		redirect(base_url('subclasse'));
 	}
 
 	public function extincao_derivados($subclasse_codigo){
