@@ -31,10 +31,10 @@ O servidor web Apache também é necessário, visto o ambiente de execução do 
 ************
 # Instalação
 
-De forma mais simplificada é possível baixar e instalar o `XAMPP <https://www.apachefriends.org/pt_br/index.html>`,
+De forma mais simplificada é possível baixar e instalar o [XAMPP](https://www.apachefriends.org/pt_br/index.html),
 que contém o PHP, MySQL e o servidor de páginas web Apache.
 
-Após, importar o arquivo contido neste repositório, 'pcd.sql', para seu banco de dados.
+Após, importar o arquivo contido neste repositório, [pcd.sql](https://github.com/ronaisavegnago/pcd/blob/master/pcd.sql), para seu banco de dados.
 
 E por fim, acesse o seguinte endereço em seu navegador: http://localhost/pcd
 
@@ -43,4 +43,151 @@ E por fim, acesse o seguinte endereço em seu navegador: http://localhost/pcd
 
 - Criar, editar, desativar, reativar e extinguir classes, subclasses, grupos e subgrupos do plano de classificação.
 - Exportar todos os dados para o formato XML.
+- Importar dados a partir de um plano de classificação em formato XML, armazenando-o no banco de dados local.
+
+# Regras para importar Plano de Classificação
+
+Para importar um plano de classificação é necessário seguir a **ordem e nomeclatura** dos elementos disponveis no arquivo [pcd.xml](https://github.com/ronaisavegnago/pcd/blob/master/pcd.xml), presente neste repositório e definidos a seguir: 
+
+*elementos obrigatórios
+
+	classes*
+		classe*
+			classe_codigo*
+			classe_nome*
+
+			registro_abertura*
+				data*
+				hora*
+				responsavel*
+
+			registro_desativacao
+				data*
+				hora*
+				responsavel*
+
+			registro_reativacao
+				data*
+				hora*
+				responsavel*
+
+			registro_extincao
+				data*
+				hora*
+				responsavel*
+
+			registro_mudanca_nome
+				data*
+				hora*
+				responsavel*
+
+			registro_deslocamento
+				data*
+				hora*
+				responsavel*
+
+		subclasse
+			subclasse_codigo*
+			subclasse_nome*
+			subclasse_subordinacao*
+
+			registro_abertura*
+				data*
+				hora*
+				responsavel*
+
+			registro_desativacao
+				data*
+				hora*
+				responsavel*
+
+			registro_reativacao
+				data*
+				hora*
+				responsavel*
+
+			registro_extincao
+				data*
+				hora*
+				responsavel*
+
+			registro_mudanca_nome
+				data*
+				hora*
+				responsavel*
+
+			registro_deslocamento
+				data*
+				hora*
+				responsavel*
+
+		grupo
+			subclasse_codigo*
+			subclasse_nome*
+			subclasse_subordinacao*
+
+			registro_abertura*
+				data*
+				hora*
+				responsavel*
+
+			registro_desativacao
+				data*
+				hora*
+				responsavel*
+
+			registro_reativacao
+				data*
+				hora*
+				responsavel*
+
+			registro_extincao
+				data*
+				hora*
+				responsavel*
+
+			registro_mudanca_nome
+				data*
+				hora*
+				responsavel*
+
+			registro_deslocamento
+				data*
+				hora*
+				responsavel*
+
+		subgrupo
+			subclasse_codigo*
+			subclasse_nome*
+			subclasse_subordinacao*
+
+			registro_abertura*
+				data*
+				hora*
+				responsavel*
+
+			registro_desativacao
+				data*
+				hora*
+				responsavel*
+
+			registro_reativacao
+				data*
+				hora*
+				responsavel*
+
+			registro_extincao
+				data*
+				hora*
+				responsavel*
+
+			registro_mudanca_nome
+				data*
+				hora*
+				responsavel*
+
+			registro_deslocamento
+				data*
+				hora*
+				responsavel*
 
