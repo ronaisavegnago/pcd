@@ -47,5 +47,147 @@ E por fim, acesse o seguinte endereço em seu navegador: http://localhost/pcd
 
 # Regras para importar Plano de Classificação
 
-Para importar um plano de classificação
+Para importar um plano de classificação é necessário seguir a ordem e nomeclatura dos elementos disponveis no arquivo pcd.xml, presente neste repositório e definidos a seguir: 
+
+*elementos obrigatórios
+
+classes*
+	classe*
+		classe_codigo*
+		classe_nome*
+		
+		registro_abertura*
+			data*
+			hora*
+			responsavel*
+			
+		registro_desativacao
+			data*
+			hora*
+			responsavel*
+		
+		registro_reativacao
+			data*
+			hora*
+			responsavel*
+			
+		registro_extincao
+			data*
+			hora*
+			responsavel*
+			
+		registro_mudanca_nome
+			data*
+			hora*
+			responsavel*
+		
+		registro_deslocamento
+			data*
+			hora*
+			responsavel*
+			
+	subclasse
+		subclasse_codigo*
+		subclasse_nome*
+		subclasse_subordinacao*
+		
+		registro_abertura*
+			data*
+			hora*
+			responsavel*
+			
+		registro_desativacao
+			data*
+			hora*
+			responsavel*
+		
+		registro_reativacao
+			data*
+			hora*
+			responsavel*
+			
+		registro_extincao
+			data*
+			hora*
+			responsavel*
+			
+		registro_mudanca_nome
+			data*
+			hora*
+			responsavel*
+		
+		registro_deslocamento
+			data*
+			hora*
+			responsavel*
+	
+	grupo
+		subclasse_codigo*
+		subclasse_nome*
+		subclasse_subordinacao*
+		
+		registro_abertura*
+			data*
+			hora*
+			responsavel*
+			
+		registro_desativacao
+			data*
+			hora*
+			responsavel*
+		
+		registro_reativacao
+			data*
+			hora*
+			responsavel*
+			
+		registro_extincao
+			data*
+			hora*
+			responsavel*
+			
+		registro_mudanca_nome
+			data*
+			hora*
+			responsavel*
+		
+		registro_deslocamento
+			data*
+			hora*
+			responsavel*
+			
+	subgrupo
+		subclasse_codigo*
+		subclasse_nome*
+		subclasse_subordinacao*
+		
+		registro_abertura*
+			data*
+			hora*
+			responsavel*
+			
+		registro_desativacao
+			data*
+			hora*
+			responsavel*
+		
+		registro_reativacao
+			data*
+			hora*
+			responsavel*
+			
+		registro_extincao
+			data*
+			hora*
+			responsavel*
+			
+		registro_mudanca_nome
+			data*
+			hora*
+			responsavel*
+		
+		registro_deslocamento
+			data*
+			hora*
+			responsavel*
 
