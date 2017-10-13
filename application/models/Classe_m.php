@@ -22,6 +22,13 @@ class Classe_m extends CI_Model{
 		")->result();
 	}
 
+	public function get_classe_codigo2($nome){
+		$this->db->select('classe_codigo');
+		$this->db->where('classe_nome',$nome);
+		$classe = $this->db->get('classe')->result();
+		return $classe[0]->classe_codigo;
+	}
+
 	public function get_classes_ativas(){
 		return $this->db->query("
 			select * from classe c
@@ -117,5 +124,46 @@ class Classe_m extends CI_Model{
 
 	public function count(){
 		return $this->db->count_all_results('classe');
+	}
+
+	public function set_status($codigo){
+		$extincao = $this->db->query("select * from extincao_classe as e where e.classe_classe_codigo = ".$codigo)->result();
+		if(count($extincao) == 1){
+			$data['classe_ativa'] = 0;
+			$this->db->where('classe_codigo',$codigo);
+			$this->db->update('classe',$data);
+		}else{
+			$desativacao = $this->db->query("select * from desativacao_classe as d where d.classe_classe_codigo = ".$codigo)->result();
+			if(count($desativacao) > 0){
+				$reativacao = $this->db->query("select * from reativacao_classe as r where r.classe_classe_codigo = ".$codigo)->result();
+				if(count($reativacao) > 0){
+					$desativacao = $this->db->query("
+							select d.data as data,d.hora as hora from desativacao_classe as d 
+							where d.classe_classe_codigo = ".$codigo." 
+							order by d.data desc,d.hora desc
+							limit 1
+						")->result();
+					$reativacao = $this->db->query("
+						select r.data as data,r.hora as hora from reativacao_classe as r
+						where r.classe_classe_codigo = ".$codigo."
+						order by r.data desc,r.hora desc
+						limit 1
+						")->result();
+
+					$desativacao_data = $desativacao[0]->data.' '.$desativacao[0]->hora;
+					$reativacao_data = $reativacao[0]->data.' '.$reativacao[0]->hora;
+
+					if($desativacao_data > $reativacao_data){
+						$data['classe_ativa'] = 0;
+						$this->db->where('classe_codigo',$codigo);
+						$this->db->update('classe',$data);
+					}
+				}else{
+					$data['classe_ativa'] = 0;
+					$this->db->where('classe_codigo',$codigo);
+					$this->db->update('classe',$data);
+				}
+			}
+		}
 	}
 }

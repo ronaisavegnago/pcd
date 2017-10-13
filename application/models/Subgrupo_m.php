@@ -123,4 +123,57 @@ class Subgrupo_m extends CI_Model{
 		return $this->db->get('deslocamento_subgrupo')->result();
 	}
 
+	public function add_extincao($data){
+		$this->db->insert('extincao_subgrupo',$data);
+	}
+
+	public function add_desativacao($data){
+		$this->db->inset('desativacao_subgrupo',$data);
+	}
+
+	public function add_reativacao($data){
+		$this->db->insert('reativacao_subgrupo',$data);
+	}
+
+	public function set_status($codigo){
+		$extincao = $this->db->query("select * from extincao_subgrupo as e where e.subgrupo_subgrupo_codigo = ".$codigo)->result();
+		if(count($extincao) == 1){
+			$data['subgrupo_ativo'] = 0;
+			$this->db->where('subgrupo_codigo',$codigo);
+			$this->db->update('subgrupo',$data);
+		}else{
+			$desativacao = $this->db->query("select * from desativacao_subgrupo as d where d.subgrupo_subgrupo_codigo = ".$codigo)->result();
+			if(count($desativacao) > 0){
+				$reativacao = $this->db->query("select * from reativacao_subgrupo as r where c.subgrupo_subgrupo_codigo = ".$codigo)->result();
+				if(count($reativacao) > 0){
+					$desativacao = $this->db->query("
+							select d.data as data,d.hora as hora from desativacao_subgrupo as d 
+							where d.subgrupo_subgrupo_codigo = ".$codigo." 
+							order by d.data desc,d.hora desc
+							limit 1
+						")->result();
+					$reativacao = $this->db->query("
+						select r.data as data,r.hora as hora from reativacao_subgrupo as r
+						where r.subgrupo_subgrupo_codigo = ".$codigo."
+						order by r.data desc,r.hora desc
+						limit 1
+						")->result();
+
+					$desativacao_data = $desativacao[0]->data.' '.$desativacao[0]->hora;
+					$reativacao_data = $reativacao[0]->data.' '.$reativacao[0]->hora;
+
+					if($desativacao_data > $reativacao_data){
+						$data['subgrupo_ativo'] = 0;
+						$this->db->where('subgrupo_codigo',$codigo);
+						$this->db->update('subgrupo',$data);
+					}
+				}else{
+					$data['subgrupo_ativo'] = 0;
+					$this->db->where('subgrupo_codigo',$codigo);
+					$this->db->update('subgrupo',$data);
+				}
+			}
+		}
+	}
+
 }

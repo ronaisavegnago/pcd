@@ -74,9 +74,9 @@ class Home_c extends CI_Controller {
 			$data2 = array('upload_data' => $this->upload->data());
 			$xml = simplexml_load_file(base_url('upload/'.$data2['upload_data']['file_name']));
 			
-			// echo '<pre>';
-			// print_r($xml);
-			// echo '</pre>';			
+			echo '<pre>';
+			print_r($xml);
+			echo '</pre>';	
 
 			foreach($xml as $x){
 				if($x->classe_codigo){
@@ -84,14 +84,14 @@ class Home_c extends CI_Controller {
 					$data['classe_nome'] = $x->classe_nome;
 					$data['classe_ativa'] = 1;
 					$data['classe_subordinacao'] = '';
-					//$this->classe->add_classe($data);
+					$this->classe->add_classe($data);
 					unset($data);
 
 					$data['data'] = $x->registro_abertura->data;
 					$data['hora'] = $x->registro_abertura->hora;
 					$data['responsavel'] = $x->registro_abertura->responsavel;
 					$data['classe_classe_codigo'] = $x->classe_codigo;
-					//$this->classe->add_data_abertura($data);
+					$this->classe->add_data_abertura($data);
 					unset($data);
 
 					if($x->registro_desativacao){
@@ -100,18 +100,18 @@ class Home_c extends CI_Controller {
 							$data['hora'] = $rd->hora;
 							$data['responsavel'] = $rd->responsavel;
 							$data['classe_classe_codigo'] = $x->classe_codigo;
-							// $this->classe->insere_desativacao($data);
+							$this->classe->insere_desativacao($data);
 							unset($data);
 						}
 					}
 
-					if($x->reativacao_classe){
-						foreach($x->reativacao_classe as $rc){
+					if($x->registro_reativacao){
+						foreach($x->registro_reativacao as $rc){
 							$data['data'] = $rc->data;
 							$data['hora'] = $rc->hora;
 							$data['responsavel'] = $rc->responsavel;
 							$data['classe_classe_codigo'] = $x->classe_codigo;
-							// $this->classe->insere_reativacao($data);
+							$this->classe->insere_reativacao($data);
 							unset($data);	
 						}
 					}
@@ -121,23 +121,243 @@ class Home_c extends CI_Controller {
 						$data['hora'] = $x->registro_extincao->hora;
 						$data['responsavel'] = $x->registro_extincao->responsavel;
 						$data['classe_classe_codigo'] = $x->classe_codigo;
-						// $this->classe->extinguir_classe($data);
+						$this->classe->extinguir_classe($data);
 						unset($data);	
 					}
 
-					if($x->registro_mudanca_nome_classe){
-						foreach($x->registro_mudanca_nome_classe as $nc){
+					if($x->registro_mudanca_nome){
+						foreach($x->registro_mudanca_nome as $nc){
 							$data['data'] = $nc->data;
 							$data['hora'] = $nc->hora;
 							$data['responsavel'] = $nc->responsavel;
 							$data['nome_anterior'] = $nc->nome_anterior;
 							$data['classe_classe_codigo'] = $x->classe_codigo;
-							// $this->classe->add_mudanca_nome($data);
-							print_r($data);
-							echo '<br><br>';
+							$this->classe->add_mudanca_nome($data);
 							unset($data);
 						}
 					}
+
+					$this->classe->set_status($x->classe_codigo);
+				}
+
+				if($x->subclasse_codigo){
+					$data['subclasse_codigo'] = $x->subclasse_codigo;
+					$data['subclasse_nome'] = $x->subclasse_nome;
+					$data['subclasse_ativa'] = 1;
+					$data['classe_classe_codigo'] = $this->classe->get_classe_codigo2($x->subclasse_subordinacao);
+					$this->subclasse->add_subclasse($data);
+					unset($data);
+
+
+					$data['data'] = $x->registro_abertura->data;
+					$data['hora'] = $x->registro_abertura->hora;
+					$data['responsavel'] = $x->registro_abertura->responsavel;
+					$data['subclasse_subclasse_codigo'] = $x->subclasse_codigo;
+					$this->subclasse->add_abertura($data);
+					unset($data);
+
+					if($x->registro_extincao){
+						$data['data'] = $x->registro_extincao->data;
+						$data['hora'] = $x->registro_extincao->hora;
+						$data['responsavel'] = $x->registro_extincao->responsavel;
+						$data['subclasse_subclasse_codigo'] = $x->subclasse_codigo;
+						$this->subclasse->extinguir_subclasse($data);
+						unset($data);
+					}
+
+					if($x->registro_desativacao){
+						foreach($x->registro_desativacao as $r){
+							$data['data'] = $r->data;
+							$data['hora'] = $r->hora;
+							$data['responsavel'] = $r->responsavel;
+							$data['subclasse_subclasse_codigo'] = $x->subclasse_codigo;
+							$this->subclasse->add_registro_desativacao($data);
+							unset($data);
+						}
+					}
+
+					if($x->registro_reativacao){
+						foreach($x->registro_reativacao as $r){
+							$data['data'] = $r->data;
+							$data['hora'] = $r->hora;
+							$data['responsavel'] = $r->responsavel;
+							$data['subclasse_subclasse_codigo'] = $x->subclasse_codigo;
+							$this->subclasse->add_registro_reativacao($data);
+							unset($data);
+						}
+					}
+
+					if($x->registro_mudanca_nome){
+						foreach($x->registro_mudanca_nome as $r){
+							$data['data'] = $r->data;
+							$data['hora'] = $r->hora;
+							$data['responsavel'] = $r->responsavel;
+							$data['nome_anterior'] = $r->nome_anterior;
+							$data['subclasse_subclasse_codigo'] = $x->subclasse_codigo;
+							$this->subclasse->add_mudanca_nome($data);
+							unset($data);
+						}
+					}
+
+					if($x->registro_deslocamento){
+						foreach($x->registro_deslocamento as $r){
+							$data['data'] = $r->data;
+							$data['hora'] = $r->hora;
+							$data['responsavel'] = $r->responsavel;
+							$data['subordinacao_anterior'] = $r->subordinacao_anterior;
+							$data['subclasse_subclasse_codigo'] = $x->subclasse_codigo;
+							$this->subclasse->deslocamento_subclasse($data);
+							unset($data);
+						}
+					}
+
+					$this->classe->set_status($x->subclasse_codigo);
+				}
+
+				if($x->grupo_codigo){
+					$data['grupo_codigo'] = $x->grupo_codigo;
+					$data['grupo_nome'] = $x->grupo_nome;
+					$data['grupo_ativo'] = 1;
+					$data['subclasse_subclasse_codigo'] = $this->subclasse->get_subclasse_codigo2($x->grupo_subordinacao);
+					$this->grupo->add_grupo($data);
+					unset($data);
+
+					$data['data'] = $x->registro_abertura->data;
+					$data['hora'] = $x->registro_abertura->hora;
+					$data['responsavel'] = $x->registro_abertura->responsavel;
+					$data['grupo_grupo_codigo'] = $x->grupo_codigo;
+					$this->grupo->add_abertura($data);
+					unset($data);
+
+					if($x->registro_extincao){
+						$data['data'] = $x->registro_extincao->data;
+						$data['hora'] = $x->registro_extincao->hora;
+						$data['responsavel'] = $x->registro_extincao->responsavel;
+						$data['grupo_grupo_codigo'] = $x->grupo_codigo;
+						$this->grupo->add_extincao($data);
+						unset($data);
+					}
+
+					if($x->registro_desativacao){
+						foreach($x->registro_desaticavao as $r){
+							$data['data'] = $r->data;
+							$data['hora'] = $r->hora;
+							$data['responsavel'] = $r->responsavel;
+							$data['grupo_grupo_codigo'] = $x->grupo_codigo;
+							$this->grupo->add_desativacao($data);
+							unset($data);
+						}	
+					}
+
+					if($x->registro_deslocamento){
+						foreach($x->registro_deslocamento as $r){
+							$data['data'] = $r->data;
+							$data['hora'] = $r->hora;
+							$data['responsavel'] = $r->responsavel;
+							$data['subordinacao_anterior'] = $r->subordinacao_anterior;
+							$data['grupo_grupo_codigo'] = $x->grupo_codigo;
+							$this->grupo->add_deslocamento($data);
+							unset($data);
+						}
+					}
+
+					if($x->registro_mudanca_nome){
+						foreach($x->registro_mudanca_nome as $m){
+							$data['data'] = $m->data;
+							$data['hora'] = $m->hora;
+							$data['responsavel'] = $m->responsavel;
+							$data['nome_anterior'] = $m->subordinacao_anterior;
+							$data['grupo_grupo_codigo'] = $x->grupo_codigo;
+							$this->grupo->add_mudanca_nome($data);
+							unset($data);
+						}
+					}
+
+					if($x->registro_reativacao){
+						foreach($x->registro_reativacao as $r){
+							$data['data'] = $r->data;
+							$data['hora'] = $r->hora;
+							$data['responsavel'] = $r->responsavel;
+							$data['grupo_grupo_codigo'] = $x->grupo_codigo;
+							$this->grupo->add_registro_reativacao($data);
+							unset($data);
+						}
+					}
+
+					$this->classe->set_status($x->grupo_codigo);
+				}
+
+				if($x->subgrupo_codigo){
+					$data['subgrupo_codigo'] = $x->subgrupo_codigo;
+					$data['subgrupo_nome'] = $x->subgrupo_nome;
+					$data['subgrupo_ativo'] = 1;
+					$data['grupo_grupo_codigo'] = $this->grupo->get_grupo_codigo2($x->subgrupo_subordinacao);
+					$this->subgrupo->add_subgrupo($data);
+					unset($data);
+
+					$data['data'] = $x->registro_abertura->data;
+					$data['hora'] = $x->registro_abertura->hora;
+					$data['responsavel'] = $x->registro_abertura->responsavel;
+					$data['subgrupo_subgrupo_codigo'] = $x->subgrupo_codigo;
+					$this->subgrupo->add_abertura($data);
+					unset($data);
+
+					if($x->registro_extincao){
+						$data['data'] = $x->registro_abertura->data;
+						$data['hora'] = $x->registro_abertura->hora;
+						$data['responsavel'] = $x->registro_abertura->responsavel;
+						$data['subgrupo_subgrupo_codigo'] = $x->subgrupo_codigo;
+						// $this->subgrupo->add_extincao($data);
+						unset($data);
+					}
+
+					if($x->registro_desaticavao){
+						foreach($registro_desativacao as $r){
+							$data['data'] = $r->data;
+							$data['hora'] = $r->hora;
+							$data['responsavel'] = $r->responsavel;
+							$data['subgrupo_subgrupo_codigo'] = $x->subgrupo_codigo;
+							$this->subgrupo->add_desativacao($data);
+							unset($data);
+						}
+					}
+
+					if($x->registro_deslocamento){
+						foreach($x->registro_deslocamento as $r){
+							$data['data'] = $r->data;
+							$data['hora'] = $r->hora;
+							$data['responsavel'] = $r->responsavel;
+							$data['subordinacao_anterior'] = $r->subordinacao_anterior;
+							$data['subgrupo_subgrupo_codigo'] = $x->subgrupo_codigo;
+							$this->subgrupo->add_deslocamento($data);
+							unset($data);
+						}
+					}
+
+					if($x->registro_mudanca_nome){
+						foreach($x->registro_mudanca_nome as $m){
+							$data['data'] = $m->data;
+							$data['hora'] = $m->hora;
+							$data['responsavel'] = $m->responsavel;
+							$data['nome_anterior'] = $m->subordinacao_anterior;
+							$data['subgrupo_subgrupo_codigo'] = $x->subgrupo_codigo;
+							$this->subgrupo->add_mudanca_nome($data);
+							unset($data);
+						}
+					}
+
+					if($x->registro_reativacao){
+						foreach($x->registro_reativacao as $r){
+							$data['data'] = $r->data;
+							$data['hora'] = $r->hora;
+							$data['responsavel'] = $r->responsavel;
+							$data['subgrupo_subgrupo_codigo'] = $x->subgrupo_codigo;
+							$this->subgrupo->add_reativacao($data);
+							unset($data);
+						}
+					}
+
+					$this->classe->set_status($x->subgrupo_codigo);
 				}
 			}
 		}
@@ -177,11 +397,11 @@ class Home_c extends CI_Controller {
 				$reativacao = $this->classe->get_classe_reativacao($c->classe_codigo);
 				if(count($reativacao) > 0){
 					foreach($reativacao as $r){
-						$xml .= "\t\t<reativacao_classe>\n";
+						$xml .= "\t\t<registro_reativacao>\n";
 						$xml .= "\t\t\t<data>".$r->data."</data>\n";
 						$xml .= "\t\t\t<hora>".$r->hora."</hora>\n";
 						$xml .= "\t\t\t<responsavel>".$r->responsavel."</responsavel>\n";
-						$xml .= "\t\t</reativacao_classe>\n\n";
+						$xml .= "\t\t</registro_reativacao>\n\n";
 					}
 				unset($reativacao);
 				}
@@ -189,12 +409,12 @@ class Home_c extends CI_Controller {
 				$mudanca_nome = $this->classe->get_classe_mudancao_nome($c->classe_codigo);
 				if(count($mudanca_nome) > 0){
 					foreach($mudanca_nome as $m){
-						$xml .= "\t\t<registro_mudanca_nome_classe>\n";
+						$xml .= "\t\t<registro_mudanca_nome>\n";
 						$xml .= "\t\t\t<data>".$m->data."</data>\n";
 						$xml .= "\t\t\t<hora>".$m->hora."</hora>\n";
 						$xml .= "\t\t\t<responsavel>".$m->responsavel."</responsavel>\n";
 						$xml .= "\t\t\t<nome_anterior>".$m->nome_anterior."</nome_anterior>\n";
-						$xml .= "\t\t</registro_mudanca_nome_classe>\n\n";
+						$xml .= "\t\t</registro_mudanca_nome>\n\n";
 					}
 				}
 				unset($mudanca_nome);
@@ -240,11 +460,11 @@ class Home_c extends CI_Controller {
 				$registro_desativacao = $this->subclasse->get_subclasse_desativacao($s->subclasse_codigo);
 				if(count($registro_desativacao) > 0){
 					foreach($registro_desativacao as $r){
-						$xml .= "\t\t<registro_desativacao_subclasse>\n";
+						$xml .= "\t\t<registro_desativacao>\n";
 						$xml .= "\t\t\t<data>".$r->data."</data>\n";
 						$xml .= "\t\t\t<hora>".$r->hora."</hora>\n";
 						$xml .= "\t\t\t<responsavel>".$r->responsavel."</responsavel>\n";
-						$xml .= "\t\t</registro_desativacao_subclasse>\n\n";
+						$xml .= "\t\t</registro_desativacao>\n\n";
 					}
 				}
 				unset($registro_desativacao);
@@ -252,11 +472,11 @@ class Home_c extends CI_Controller {
 				$reativacao_subclasse = $this->subclasse->get_subclasse_reativacao($s->subclasse_codigo);
 				if(count($reativacao_subclasse) > 0){
 					foreach($reativacao_subclasse as $r){
-						$xml .= "\t\t<reativacao_subclasse>\n";
+						$xml .= "\t\t<registro_reativacao>\n";
 						$xml .= "\t\t\t<data>".$r->data."</data>\n";
 						$xml .= "\t\t\t<hora>".$r->hora."</hora>\n";
 						$xml .= "\t\t\t<responsavel>".$r->responsavel."</responsavel>\n";
-						$xml .= "\t\t</reativacao_subclasse>\n\n";
+						$xml .= "\t\t</registro_reativacao>\n\n";
 					}
 				}
 				unset($reativacao_subclasse);
@@ -264,24 +484,24 @@ class Home_c extends CI_Controller {
 				$registro_mudanca_nome_subclasse = $this->subclasse->get_subclasse_mudanca_nome($s->subclasse_codigo);
 				if(count($registro_mudanca_nome_subclasse) > 0){
 					foreach($registro_mudanca_nome_subclasse as $r){
-						$xml .= "\t\t<registro_mudanca_nome_subclasse>\n";
+						$xml .= "\t\t<registro_mudanca_nome>\n";
 						$xml .= "\t\t\t<data>".$r->data."</data>\n";
 						$xml .= "\t\t\t<hora>".$r->hora."</hora>\n";
 						$xml .= "\t\t\t<responsavel>".$r->responsavel."</responsavel>\n";
 						$xml .= "\t\t\t<nome_anterior>".$r->nome_anterior."</nome_anterior>\n";
-						$xml .= "\t\t</registro_mudanca_nome_subclasse>\n\n";
+						$xml .= "\t\t</registro_mudanca_nome>\n\n";
 					}
 				}
 				unset($registro_mudanca_nome_subclasse);
 
 				$deslocamento = $this->subclasse->get_subclasse_deslocamento($s->subclasse_codigo);
 				foreach($deslocamento as $d){
-					$xml .= "\t\t<registro_deslocamento_subclasse>\n";
+					$xml .= "\t\t<registro_deslocamento>\n";
 					$xml .= "\t\t\t<data>".$d->data."</data>\n";
 					$xml .= "\t\t\t<hora>".$d->hora."</hora>\n";
 					$xml .= "\t\t\t<responsavel>".$d->responsavel."</responsavel>\n";
 					$xml .= "\t\t\t<subordinacao_anterior>".$d->subordinacao_anterior."</subordinacao_anterior>\n";
-					$xml .= "\t\t</registro_deslocamento_subclasse>\n\n";
+					$xml .= "\t\t</registro_deslocamento>\n\n";
 				}
 				unset($deslocamento);
 
@@ -339,11 +559,11 @@ class Home_c extends CI_Controller {
 				$reativacao_grupo = $this->grupo->get_grupo_reativacao($s->grupo_codigo);
 				if(count($reativacao_grupo) > 0){
 					foreach($reativacao_grupo as $r){
-						$xml .= "\t\t<reativacao_grupo>\n";
+						$xml .= "\t\t<registro_reativacao>\n";
 						$xml .= "\t\t\t<data>".$r->data."</data>\n";
 						$xml .= "\t\t\t<hora>".$r->hora."</hora>\n";
 						$xml .= "\t\t\t<responsavel>".$r->responsavel."</responsavel>\n";
-						$xml .= "\t\t</reativacao_grupo>\n\n";
+						$xml .= "\t\t</registro_reativacao>\n\n";
 					}
 				}
 				unset($reativacao_grupo);
@@ -351,24 +571,24 @@ class Home_c extends CI_Controller {
 				$registro_mudanca_nome_grupo = $this->grupo->get_grupo_mudanca_nome($s->grupo_codigo);
 				if(count($registro_mudanca_nome_grupo) > 0){
 					foreach($registro_mudanca_nome_grupo as $r){
-						$xml .= "\t\t<registro_mudanca_nome_grupo>\n";
+						$xml .= "\t\t<registro_mudanca_nome>\n";
 						$xml .= "\t\t\t<data>".$r->data."</data>\n";
 						$xml .= "\t\t\t<hora>".$r->hora."</hora>\n";
 						$xml .= "\t\t\t<responsavel>".$r->responsavel."</responsavel>\n";
 						$xml .= "\t\t\t<nome_anterior>".$r->nome_anterior."</nome_anterior>\n";
-						$xml .= "\t\t</registro_mudanca_nome_grupo>\n\n";
+						$xml .= "\t\t</registro_mudanca_nome>\n\n";
 					}
 				}
 				unset($registro_mudanca_nome_grupo);
 
 				$deslocamento = $this->grupo->get_grupo_deslocamento($s->grupo_codigo);
 				foreach($deslocamento as $d){
-					$xml .= "\t\t<registro_deslocamento_grupo>\n";
+					$xml .= "\t\t<registro_deslocamento>\n";
 					$xml .= "\t\t\t<data>".$d->data."</data>\n";
 					$xml .= "\t\t\t<hora>".$d->hora."</hora>\n";
 					$xml .= "\t\t\t<responsavel>".$d->responsavel."</responsavel>\n";
 					$xml .= "\t\t\t<subordinacao_anterior>".$d->subordinacao_anterior."</subordinacao_anterior>\n";
-					$xml .= "\t\t</registro_deslocamento_grupo>\n\n";
+					$xml .= "\t\t</registro_deslocamento>\n\n";
 				}
 				unset($deslocamento);
 
@@ -426,11 +646,11 @@ class Home_c extends CI_Controller {
 				$reativacao_subgrupo = $this->subgrupo->get_subgrupo_reativacao($s->subgrupo_codigo);
 				if(count($reativacao_subgrupo) > 0){
 					foreach($reativacao_subgrupo as $r){
-						$xml .= "\t\t<reativacao_subgrupo>\n";
+						$xml .= "\t\t<registro_reativacao>\n";
 						$xml .= "\t\t\t<data>".$r->data."</data>\n";
 						$xml .= "\t\t\t<hora>".$r->hora."</hora>\n";
 						$xml .= "\t\t\t<responsavel>".$r->responsavel."</responsavel>\n";
-						$xml .= "\t\t</reativacao_subgrupo>\n\n";
+						$xml .= "\t\t</registro_reativacao>\n\n";
 					}
 				}
 				unset($reativacao_subgrupo);
@@ -438,24 +658,24 @@ class Home_c extends CI_Controller {
 				$registro_mudanca_nome_subgrupo = $this->subgrupo->get_subgrupo_mudanca_nome($s->subgrupo_codigo);
 				if(count($registro_mudanca_nome_subgrupo) > 0){
 					foreach($registro_mudanca_nome_subgrupo as $r){
-						$xml .= "\t\t<registro_mudanca_nome_subgrupo>\n";
+						$xml .= "\t\t<registro_mudanca_nome>\n";
 						$xml .= "\t\t\t<data>".$r->data."</data>\n";
 						$xml .= "\t\t\t<hora>".$r->hora."</hora>\n";
 						$xml .= "\t\t\t<responsavel>".$r->responsavel."</responsavel>\n";
 						$xml .= "\t\t\t<nome_anterior>".$r->nome_anterior."</nome_anterior>\n";
-						$xml .= "\t\t</registro_mudanca_nome_subgrupo>\n";
+						$xml .= "\t\t</registro_mudanca_nome>\n";
 					}
 				}
 				unset($registro_mudanca_nome_subgrupo);
 
 				$deslocamento = $this->subgrupo->get_subgrupo_deslocamento($s->subgrupo_codigo);
 				foreach($deslocamento as $d){
-					$xml .= "\t\t<registro_deslocamento_subgrupo>\n";
+					$xml .= "\t\t<registro_deslocamento>\n";
 					$xml .= "\t\t\t<data>".$d->data."</data>\n";
 					$xml .= "\t\t\t<hora>".$d->hora."</hora>\n";
 					$xml .= "\t\t\t<responsavel>".$d->responsavel."</responsavel>\n";
 					$xml .= "\t\t\t<subordinacao_anterior>".$d->subordinacao_anterior."</subordinacao_anterior>\n";
-					$xml .= "\t\t</registro_deslocamento_subgrupo>\n\n";
+					$xml .= "\t\t</registro_deslocamento>\n\n";
 				}
 				unset($deslocamento);
 

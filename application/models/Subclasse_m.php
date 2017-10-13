@@ -137,4 +137,60 @@ class Subclasse_m extends CI_Model{
 		$this->db->order_by('data','asc');
 		return $this->db->get('deslocamento_subclasse')->result();
 	}
+
+	public function add_registro_desativacao($data){
+		$this->db->insert('desativacao_subclasse',$data);
+	}
+
+	public function add_registro_reativacao($data){
+		$this->db->insert('reativacao_subclasse',$data);
+	}
+
+	public function get_subclasse_codigo2($subclasse){
+		$this->db->select('subclasse_codigo');
+		$this->db->where('subclasse_nome',$subclasse);
+		$subc = $this->db->get('subclasse')->result();
+		return $subc[0]->subclasse_codigo;
+	}
+
+	public function set_status($codigo){
+		$extincao = $this->db->query("select * from extincao_subclasse as e where e.subclasse_subclasse_codigo = ".$codigo)->result();
+		if(count($extincao) == 1){
+			$data['subclasse_ativa'] = 0;
+			$this->db->where('subclasse_codigo',$codigo);
+			$this->db->update('subclasse',$data);
+		}else{
+			$desativacao = $this->db->query("select * from desativacao_subclasse as d where d.subclasse_subclasse_codigo = ".$codigo)->result();
+			if(count($desativacao) > 0){
+				$reativacao = $this->db->query("select * from reativacao_subclasse as r where c.subclasse_subclasse_codigo = ".$codigo)->result();
+				if(count($reativacao) > 0){
+					$desativacao = $this->db->query("
+							select d.data as data,d.hora as hora from desativacao_subclasse as d 
+							where d.subclasse_subclasse_codigo = ".$codigo." 
+							order by d.data desc,d.hora desc
+							limit 1
+						")->result();
+					$reativacao = $this->db->query("
+						select r.data as data,r.hora as hora from reativacao_subclasse as r
+						where r.subclasse_subclasse_codigo = ".$codigo."
+						order by r.data desc,r.hora desc
+						limit 1
+						")->result();
+
+					$desativacao_data = $desativacao[0]->data.' '.$desativacao[0]->hora;
+					$reativacao_data = $reativacao[0]->data.' '.$reativacao[0]->hora;
+
+					if($desativacao_data > $reativacao_data){
+						$data['subclasse_ativa'] = 0;
+						$this->db->where('subclasse_codigo',$codigo);
+						$this->db->update('subclasse',$data);
+					}
+				}else{
+					$data['subclasse_ativa'] = 0;
+					$this->db->where('subclasse_codigo',$codigo);
+					$this->db->update('subclasse',$data);
+				}
+			}
+		}
+	}
 }

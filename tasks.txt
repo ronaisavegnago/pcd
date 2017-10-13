@@ -1,0 +1,10 @@
+- classe
+- abertura
+- desativacao
+- deslocamento
+- extincao
+- mudanca nome
+- reativacao
+
+
+definir se está ativo ou inativo
