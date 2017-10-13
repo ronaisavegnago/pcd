@@ -43,4 +43,9 @@ E por fim, acesse o seguinte endereço em seu navegador: http://localhost/pcd
 
 - Criar, editar, desativar, reativar e extinguir classes, subclasses, grupos e subgrupos do plano de classificação.
 - Exportar todos os dados para o formato XML.
+- Importar dados a partir de um plano de classificação em formato XML, armazenando-o no banco de dados local.
+
+# Regras para importar Plano de Classificação
+
+Para importar um plano de classificação
 
