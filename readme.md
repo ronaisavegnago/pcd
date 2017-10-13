@@ -51,143 +51,143 @@ Para importar um plano de classificação é necessário seguir a ordem e nomecl
 
 *elementos obrigatórios
 
-classes*
-	classe*
-		classe_codigo*
-		classe_nome*
-		
-		registro_abertura*
-			data*
-			hora*
-			responsavel*
-			
-		registro_desativacao
-			data*
-			hora*
-			responsavel*
-		
-		registro_reativacao
-			data*
-			hora*
-			responsavel*
-			
-		registro_extincao
-			data*
-			hora*
-			responsavel*
-			
-		registro_mudanca_nome
-			data*
-			hora*
-			responsavel*
-		
-		registro_deslocamento
-			data*
-			hora*
-			responsavel*
-			
-	subclasse
-		subclasse_codigo*
-		subclasse_nome*
-		subclasse_subordinacao*
-		
-		registro_abertura*
-			data*
-			hora*
-			responsavel*
-			
-		registro_desativacao
-			data*
-			hora*
-			responsavel*
-		
-		registro_reativacao
-			data*
-			hora*
-			responsavel*
-			
-		registro_extincao
-			data*
-			hora*
-			responsavel*
-			
-		registro_mudanca_nome
-			data*
-			hora*
-			responsavel*
-		
-		registro_deslocamento
-			data*
-			hora*
-			responsavel*
-	
-	grupo
-		subclasse_codigo*
-		subclasse_nome*
-		subclasse_subordinacao*
-		
-		registro_abertura*
-			data*
-			hora*
-			responsavel*
-			
-		registro_desativacao
-			data*
-			hora*
-			responsavel*
-		
-		registro_reativacao
-			data*
-			hora*
-			responsavel*
-			
-		registro_extincao
-			data*
-			hora*
-			responsavel*
-			
-		registro_mudanca_nome
-			data*
-			hora*
-			responsavel*
-		
-		registro_deslocamento
-			data*
-			hora*
-			responsavel*
-			
-	subgrupo
-		subclasse_codigo*
-		subclasse_nome*
-		subclasse_subordinacao*
-		
-		registro_abertura*
-			data*
-			hora*
-			responsavel*
-			
-		registro_desativacao
-			data*
-			hora*
-			responsavel*
-		
-		registro_reativacao
-			data*
-			hora*
-			responsavel*
-			
-		registro_extincao
-			data*
-			hora*
-			responsavel*
-			
-		registro_mudanca_nome
-			data*
-			hora*
-			responsavel*
-		
-		registro_deslocamento
-			data*
-			hora*
-			responsavel*
+	classes*
+		classe*
+			classe_codigo*
+			classe_nome*
+
+			registro_abertura*
+				data*
+				hora*
+				responsavel*
+
+			registro_desativacao
+				data*
+				hora*
+				responsavel*
+
+			registro_reativacao
+				data*
+				hora*
+				responsavel*
+
+			registro_extincao
+				data*
+				hora*
+				responsavel*
+
+			registro_mudanca_nome
+				data*
+				hora*
+				responsavel*
+
+			registro_deslocamento
+				data*
+				hora*
+				responsavel*
+
+		subclasse
+			subclasse_codigo*
+			subclasse_nome*
+			subclasse_subordinacao*
+
+			registro_abertura*
+				data*
+				hora*
+				responsavel*
+
+			registro_desativacao
+				data*
+				hora*
+				responsavel*
+
+			registro_reativacao
+				data*
+				hora*
+				responsavel*
+
+			registro_extincao
+				data*
+				hora*
+				responsavel*
+
+			registro_mudanca_nome
+				data*
+				hora*
+				responsavel*
+
+			registro_deslocamento
+				data*
+				hora*
+				responsavel*
+
+		grupo
+			subclasse_codigo*
+			subclasse_nome*
+			subclasse_subordinacao*
+
+			registro_abertura*
+				data*
+				hora*
+				responsavel*
+
+			registro_desativacao
+				data*
+				hora*
+				responsavel*
+
+			registro_reativacao
+				data*
+				hora*
+				responsavel*
+
+			registro_extincao
+				data*
+				hora*
+				responsavel*
+
+			registro_mudanca_nome
+				data*
+				hora*
+				responsavel*
+
+			registro_deslocamento
+				data*
+				hora*
+				responsavel*
+
+		subgrupo
+			subclasse_codigo*
+			subclasse_nome*
+			subclasse_subordinacao*
+
+			registro_abertura*
+				data*
+				hora*
+				responsavel*
+
+			registro_desativacao
+				data*
+				hora*
+				responsavel*
+
+			registro_reativacao
+				data*
+				hora*
+				responsavel*
+
+			registro_extincao
+				data*
+				hora*
+				responsavel*
+
+			registro_mudanca_nome
+				data*
+				hora*
+				responsavel*
+
+			registro_deslocamento
+				data*
+				hora*
+				responsavel*
 
