@@ -29,9 +29,21 @@ no formato XML e manipulá-lo no próprio software.
 O servidor web Apache também é necessário, visto o ambiente de execução do software.
 
 ************
-# Instalação
+# Instalação e utilização
 
-De forma mais simplificada é possível baixar e instalar o [XAMPP](https://www.apachefriends.org/pt_br/index.html),
+Neste [link](https://goo.gl/E1wkvM) vocês pode baixar uma versão remasterizada do sistema operacional Ubuntu 17.04 com o elaborador de plano de classificação e o banco de dados já instalados. 
+
+Para utilizar esta versão remasterizada, faça o download do arquivo .iso disponível no link acima e inicialize ou instale sistema em seu computador ou máquina virtual.
+
+Usuário do SO: ubuntu
+Senha: ubuntu
+
+Usuário MySQL do banco de dados: root
+Senha MySQL: 12345
+
+************
+
+É possível baixar o código fonte e o modelo entidade-relacionamento do banco de dados, e executar de forma nativa, baixando e instalando o [XAMPP](https://www.apachefriends.org/pt_br/index.html),
 que contém o PHP, MySQL e o servidor de páginas web Apache.
 
 Após, importar o arquivo contido neste repositório, [pcd.sql](https://github.com/ronaisavegnago/pcd/blob/master/pcd.sql), para seu banco de dados.
