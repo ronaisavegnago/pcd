@@ -19,8 +19,7 @@ na seção de Issues.
 **************************
 # Changelog e novas funcionalidades
 
-Para a próxima versão, denominada Release Candidate, será implementado a funcionalidade de importar o plano de classificação
-no formato XML e manipulá-lo no próprio software.
+Para a próxima versão, serão adicionados os metadados de temporalidade do e-ARQ Brasil. Além de haver a possibilidade de exportar e importar os planos de classificação em outros formatos de arquivo, como JSON ou CSV.
 
 *******************
 # Requisitos
