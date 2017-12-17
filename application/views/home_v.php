@@ -13,7 +13,7 @@ $this->load->view('menu');
         <li><a href="<?php echo base_url('subgrupo')?>">Subgrupos</a></li>
     </ol>
 		<div class="ls-box ls-board-box">
-			<div id="sending-stats" class="row">				
+			<div id="sending-stats" class="row">
 				<div class="col-sm-6 col-md-3">
 					<div class="ls-box">
 						<div class="ls-box-head">
@@ -98,7 +98,7 @@ $this->load->view('menu');
 		</div>
 
 		<div class="ls-box-filter">
-			<!-- <a href="<?php echo base_url('Home_c/csv');?>" class="ls-btn-primary">Exportar para CSV</a> -->
+			<a href="<?php echo base_url('Home_c/csv');?>" class="ls-btn-primary">Exportar para CSV</a>
 			<!-- <a href="<?php echo base_url('Home_c/json');?>" class="ls-btn-primary">Exportar para JSON</a> -->
 			<a href="<?php echo base_url('home/xml');?>" class="ls-btn-primary">Exportar para XML</a>
 		</div>
@@ -111,7 +111,7 @@ $this->load->view('menu');
 					<div class="ls-actions-btn">
 						<button class="ls-btn-primary">Importar XML</button>
 					</div>
-				</fieldset>				
+				</fieldset>
 			</form>
 		</div>
 
@@ -138,7 +138,7 @@ $this->load->view('menu');
 				}
 				echo '</pre>';
 			}
-			?>			
+			?>
 		</div>
 	</div>
 </main>

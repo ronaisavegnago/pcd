@@ -25,6 +25,87 @@ class Home_c extends CI_Controller {
 		$this->load->view('home_v',$data);
 	}
 
+	public function csv(){
+		$classes = $this->classe->get_classes();
+		$subclasses = $this->subclasse->get_subclasses();
+		$grupos = $this->grupo->get_grupos();
+		$subgrupos = $this->subgrupo->get_subgrupos();
+
+		$fp = fopen("pcd.csv","a");
+
+		$header = "legacyId,parentId,qubitParentSlug,identifier,accessionNumber,title,levelOfDescription,extentAndMedium,repository,archivalHistory,acquisition,scopeAndContent,appraisal,accruals,arrangement,accessConditions,reproductionConditions,language,script,languageNote,physicalCharacteristics,findingAids,locationOfOriginals,locationOfCopies,relatedUnitsOfDescription,publicationNote,digitalObjectURI,generalNote,subjectAccessPoints,placeAccessPoints,nameAccessPoints,genreAccessPoints,descriptionIdentifier,institutionIdentifier,rules,descriptionStatus,levelOfDetail,revisionHistory,languageOfDescription,scriptOfDescription,sources,archivistNote,publicationStatus,physicalObjectName,physicalObjectLocation,physicalObjectType,alternativeIdentifiers,alternativeIdentifierLabels,eventDates,eventTypes,eventStartDates,eventEndDates,eventActors,eventActorHistories,culture;\n";
+
+		$escreve = fwrite($fp, $header);
+
+		$legacyId = 0;
+
+		foreach($classes as $c){
+			$publicado = ($c->classe_ativa == 1) ? "Publicado" : "Não publicado";
+
+			$classe = $legacyId.',,,'.$c->classe_codigo.',,'.$c->classe_nome.
+				',,,,,,,,,,,,PT-BR,,,,,,,,,,,,,,,,,,,,,,,,Data de abertura: '.$c->data.','.
+				$publicado.',,,,,,,,,,,,;'."\n";
+
+				$escreve = fwrite($fp, $classe);
+
+			$parentIdClasse = $legacyId;
+
+			foreach($subclasses as $s){
+				if($s->classe_classe_codigo == $c->classe_codigo){
+					$legacyId++;
+					$publicado = ($s->subclasse_ativa == 1) ? "Publicado" : "Não publicado";
+					$subclasse = $legacyId.','.$parentIdClasse.',,'.$s->subclasse_codigo.',,'.$s->subclasse_nome.
+						',,,,,,,,,,,,PT-BR,,,,,,,,,,,,,,,,,,,,,,,,Data de abertura: '.$s->data.','.
+						$publicado.',,,,,,,,,,,,;'."\n";
+
+						$escreve = fwrite($fp, $subclasse);
+
+						$parentIdSubclasse = $legacyId;
+
+						foreach($grupos as $g){
+							if($g->subclasse_subclasse_codigo == $s->subclasse_codigo){
+								$legacyId++;
+								$publicado = ($g->grupo_ativo == 1) ? "Publicado" : "Não publicado";
+								$grupo = $legacyId.','.$parentIdSubclasse.',,'.$g->grupo_codigo.',,'.$g->grupo_nome.
+									',,,,,,,,,,,,PT-BR,,,,,,,,,,,,,,,,,,,,,,,,'.$g->data.','.
+									$publicado.',,,,,,,,,,,,;'."\n";
+
+									$escreve = fwrite($fp, $grupo);
+							}
+
+							$parentIdGrupo = $legacyId;
+
+							foreach($subgrupos as $sg){
+								if($sg->grupo_grupo_codigo == $g->grupo_codigo){
+									$legacyId++;
+									$publicado = ($sg->subgrupo_ativo == 1) ? "Publicado" : "Não publicado";
+									$subgrupo = $legacyId.','.$parentIdGrupo.',,'.$sg->subgrupo_codigo.',,'.$sg->subgrupo_nome.
+										',,,,,,,,,,,,PT-BR,,,,,,,,,,,,,,,,,,,,,,,,'.$sg->data.','.
+										$publicado.',,,,,,,,,,,,;'."\n";
+
+										$escreve = fwrite($fp, $subgrupo);
+								}
+							}
+						}
+				}
+			}
+			$legacyId++;
+		}
+
+		$nome = "pcd.csv";
+
+		header('Content-Description: File Transfer');
+		header('Content-Disposition: attachment; filename="'.$nome.'"');
+		header('Content-Type: application/octet-stream');
+		header('Content-Transfer-Encoding: binary');
+		header('Content-Length: ' . filesize($nome));
+		header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
+		header('Pragma: public');
+		header('Expires: 0');
+		// Envia o arquivo para o cliente
+		readfile($nome);
+	}
+
 	public function xml(){
 		$classe = $this->classe->get_classes();
 		$subclasse = $this->subclasse->get_subclasses();
@@ -73,10 +154,10 @@ class Home_c extends CI_Controller {
 		}else{
 			$data2 = array('upload_data' => $this->upload->data());
 			$xml = simplexml_load_file(base_url('upload/'.$data2['upload_data']['file_name']));
-			
+
 			echo '<pre>';
 			print_r($xml);
-			echo '</pre>';	
+			echo '</pre>';
 
 			foreach($xml as $x){
 				if($x->classe_codigo){
@@ -112,7 +193,7 @@ class Home_c extends CI_Controller {
 							$data['responsavel'] = $rc->responsavel;
 							$data['classe_classe_codigo'] = $x->classe_codigo;
 							$this->classe->insere_reativacao($data);
-							unset($data);	
+							unset($data);
 						}
 					}
 
@@ -122,7 +203,7 @@ class Home_c extends CI_Controller {
 						$data['responsavel'] = $x->registro_extincao->responsavel;
 						$data['classe_classe_codigo'] = $x->classe_codigo;
 						$this->classe->extinguir_classe($data);
-						unset($data);	
+						unset($data);
 					}
 
 					if($x->registro_mudanca_nome){
@@ -246,7 +327,7 @@ class Home_c extends CI_Controller {
 							$data['grupo_grupo_codigo'] = $x->grupo_codigo;
 							$this->grupo->add_desativacao($data);
 							unset($data);
-						}	
+						}
 					}
 
 					if($x->registro_deslocamento){
@@ -381,7 +462,7 @@ class Home_c extends CI_Controller {
 				$xml .= "\t\t</registro_abertura>\n\n";
 				unset($registro_abertura);
 
-				
+
 				$desativacao = $this->classe->get_classe_desativacao($c->classe_codigo);
 				if(count($desativacao) > 0){
 					foreach($desativacao as $d){
