@@ -4,6 +4,23 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Home_c extends CI_Controller {
 
 	public function __construct(){
+
+		parent::__construct();
+
+	}
+
+	public function index(){
+
+		$this->load->view('home_v');
+
+	}
+
+	
+
+
+
+
+	/*public function __construct(){
 		parent::__construct();
 		$this->load->model('Classe_m','classe');
 		$this->load->model('Subclasse_m','subclasse');
@@ -695,6 +712,6 @@ class Home_c extends CI_Controller {
 		}
 
 		return $xml;
-	}
+	}*/
 
 }

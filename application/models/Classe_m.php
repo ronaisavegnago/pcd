@@ -6,7 +6,16 @@ class Classe_m extends CI_Model{
 		parent::__construct();
 	}
 
-	public function add_classe($data){
+	public function get_classes(){
+		$sql = "SELECT * FROM classe c";
+		$sql .= " INNER JOIN abertura a ON a.classe_idClasse = c.idClasse";
+		$sql .= " WHERE c.tipo = 'classe' and c.ativo = 1";
+		$sql .= " ORDER BY c.nome ASC";
+
+		return $this->db->query($sql)->result();
+	}
+
+	/*public function add_classe($data){
 		$this->db->insert('classe',$data);
 	}
 
@@ -165,5 +174,5 @@ class Classe_m extends CI_Model{
 				}
 			}
 		}
-	}
+	}*/
 }

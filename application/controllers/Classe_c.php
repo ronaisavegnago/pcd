@@ -4,6 +4,28 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Classe_c extends CI_Controller {
 
 	public function __construct(){
+
+		parent::__construct();
+
+		$this->load->model('Classe_m', 'classe');
+	
+	}
+
+	public function index(){
+
+		$classes = $this->classe->get_classes();
+
+		$data['classes'] = $classes;
+
+		$this->load->view('classe/classe',$data);
+
+	}
+
+
+
+	
+	/*
+	public function __construct(){
 		parent::__construct();
 		$this->load->model('Classe_m','classe');
 		$this->load->model('Subclasse_m','subclasse');
@@ -152,6 +174,6 @@ class Classe_c extends CI_Controller {
 				'</tr>';
 		}
 		return $td;
-	}
+	}*/
 
 }
